@@ -7,7 +7,7 @@
         <div class="widget-header">
             <div class="row">
                 <div class="mb-1 col-lg-8">
-                    <h4>Courier List</h4>
+                    <h4><span style="">Courier List</span></h4>
                 </div>
 
                 <div class="mb-1 col-lg-4">
@@ -46,6 +46,38 @@
                        <a href="{% url 'update_courier' item.id %}">
                             <button class="btn btn-outline-info"><i class="fa fa-edit"> </i></button>
                         </a>
+
+                        <button class="btn btn-outline-danger" data-toggle="modal"
+                                            data-target="#deletemodal{{item.id}}">
+                                        <i class="fa fa-trash"></i>
+                        </button>
+
+                        <div class="modal fade" id="deletemodal{{item.id}}" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Delete Courier Service</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5 class="text-center p-2">Courier:<span style="color: red"> {{item.name}}</span></h5>
+                                        <p>Are you sure to delete this data?
+                                            This process can not be undone.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal">
+                                            Cancel
+                                        </button>
+                                        <a href="{% url 'courier-delete' id=item.id %}"
+                                           class="btn btn-danger">Delete</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
 
                     </td>
 
