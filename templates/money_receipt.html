@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px dotted red;
+  border-collapse: collapse;
+}
+th, td {
+  font-size: 14px;
+  padding-top: 5px;
+}
+th {
+    background-color: red;
+    text-align: center;
+    color: white;
+    padding-right: 1px;
+    width: 18%;
+}
+td {
+    text-align: left;
+    width: 32%;
+    padding-left: 3px;
+}
+#div1 {
+    height:20px;
+}
+#div2 {
+    height:20px;
+}
+#div3 {
+    height:20px;
+}
+.footer {
+   position: fixed;
+   left: 0;
+   border-top: 2px solid red;
+   bottom: 0;
+   width: 100%;
+   color: black;
+   text-align: center;
+   font-size: 14px;
+}
+
+
+</style>
+</head>
+<body>
+
+<div id="div1">
+<div class="center" style="text-align: left;">
+
+    <table style="width: 100%; border-collapse: collapse; border-style: hidden;" border="0">
+        <tbody>
+        <tr style="border-style: hidden;">
+            <th style="width: 50%;  height:86px;"><img class="" src="../static/assets/img/pdf-logo.png" alt="Header Avatar" width="700" height="100"></th>
+            <th style="width: 50%;  height:86px; font-size:12px; text-align: center; padding-left:2px;">KA-74/1, Pragati Sarani, Kuril Chowrasta, Dhaka.<br />
+                Tel: +88-02-8411515-75 | www.samiralliance.com<br />
+                Email: info.tpc@samiralliance.com</th>
+
+
+
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+</br>
+
+
+</div>
+
+
+</div>
+
+<table>
+    <tr>
+        <th colspan="4">Money Receipt</th>
+    </tr>
+    <tr>
+        <td colspan="2">Shipment No: {{shipment.shipment_no}}</td>
+        <td colspan="2">Date: {{shipment.shipment_date}}</td>
+    </tr>
+    <tr>
+        <td colspan="4">Received From: {{shipment.shipper}}</td>
+    </tr>
+    <tr>
+        <td colspan="4">The sum of Taka: only</td>
+    </tr>
+    <tr>
+        <td colspan="4">Cash/Cheque No : {{shipment.cheque_no}}</td>
+    </tr>
+    <tr>
+        <td colspan="4">In payment of A/C: {{shipment.account_no}}</td>
+    </tr>
+    <tr>
+        <td colspan="2">For The Professional Courier</td>
+        <td colspan="1">Country: {{shipment.destination_country}}</td>
+        <td colspan="1">Weight: {{shipment.weight}} kg</td>
+    </tr>
+
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<div class="footer">
+  <p><br/>
+      KA-74/1, Pragati Sarani, Kuril Chowrasta, P/O: Khilkhet, P/S: Vatara, Dhaka-1229, Bangladesh<br/>
+      Tel: +88-02-8411515-75, Email: info.tpc@samiralliance.com, Web: samiralliance.com</p>
+</div>
+
+<p>--------------------------------------------------- &#9986;
+   -------------------------------------------------- &#9986;
+   -------------------------------------------------- &#9986;
+   --------------------------------------------------</p>
+
+<!--2nd copy-->
+
+<div id="div2">
+<div class="center" style="text-align: left;">
+
+    <table style="width: 100%; border-collapse: collapse; border-style: hidden;" border="0">
+        <tbody>
+        <tr style="border-style: hidden;">
+            <th style="width: 50%;  height:86px;"><img class="" src="../static/assets/img/pdf-logo.png" alt="Header Avatar" width="700" height="100"></th>
+            <th style="width: 50%;  height:86px; font-size:12px; text-align: center; padding-left:2px;">KA-74/1, Pragati Sarani, Kuril Chowrasta, Dhaka.<br />
+                Tel: +88-02-8411515-75 | www.samiralliance.com<br />
+                Email: info.tpc@samiralliance.com</th>
+
+
+
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+</br>
+
+
+</div>
+
+
+</div>
+
+<table>
+    <tr>
+        <th colspan="4">Money Receipt</th>
+    </tr>
+    <tr>
+        <td colspan="2">Shipment No: {{shipment.shipment_no}}</td>
+        <td colspan="2">Date: {{shipment.shipment_date}}</td>
+    </tr>
+    <tr>
+        <td colspan="4">Received From: {{shipment.shipper}}</td>
+    </tr>
+    <tr>
+        <td colspan="4">The sum of taka: </td>
+    </tr>
+    <tr>
+        <td colspan="4">Cash/Cheque No : {{shipment.cheque_no}}</td>
+    </tr>
+    <tr>
+        <td colspan="4">In payment pf A/C: {{shipment.account_no}}</td>
+    </tr>
+    <tr>
+        <td colspan="2">Shipper:</td>
+        <td colspan="1">Country: {{shipment.destination_country}}</td>
+        <td colspan="1">Weight: {{shipment.weight}} kg</td>
+    </tr>
+
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<div class="footer">
+  <p><br/>
+      KA-74/1, Pragati Sarani, Kuril Chowrasta, P/O: Khilkhet, P/S: Vatara, Dhaka-1229, Bangladesh<br/>
+      Tel: +88-02-8411515-75, Email: info.tpc@samiralliance.com, Web: samiralliance.com</p>
+</div>
+
+
+</body>
+</html>
