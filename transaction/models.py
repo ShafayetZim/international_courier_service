@@ -2,6 +2,10 @@ from django.contrib.auth.models import User
 from django.db import models
 import datetime
 from dataset.models import *
+import barcode
+from barcode.writer import ImageWriter
+from io import BytesIO
+from django.core.files import File
 
 # Create your models here.
 
@@ -65,21 +69,21 @@ def shipment_no_generate():
     today_date = datetime.date.today()
 
     # GET Current Year
-    current_year = today_date.strftime('%Y')
-    prefix = "TPC-" + current_year + "-"
+    current_year = today_date.strftime('%d%m%y')
+    prefix = "" + current_year
 
     # For the very first time shipment_number is DD-MM-YY-0001
-    next_shipment_no = '00001'
+    next_shipment_no = '0001'
 
     # Get Last Employee Start With TPC-
     last_shipment_no = Transaction.objects.filter(shipment_no__startswith=prefix).order_by('shipment_no').last()
 
     if last_shipment_no:
         # Cut 5 digit from the Right and converted to int (STC-YYYY-:xxxx)
-        last_shipment_four_digit = int(last_shipment_no.shipment_no[-5:])
+        last_shipment_four_digit = int(last_shipment_no.shipment_no[-4:])
 
         # Increment one with last five digit
-        next_shipment_no = '{0:05d}'.format(last_shipment_four_digit + 1)
+        next_shipment_no = '{0:04d}'.format(last_shipment_four_digit + 1)
 
     # Return custom shipment number
     return prefix + next_shipment_no
@@ -137,8 +141,26 @@ class Transaction(models.Model):
     third_party_amount = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
     cheque_no = models.CharField(max_length=200, blank=True, null=True)
     account_no = models.CharField(max_length=200, blank=True, null=True)
+    barcode = models.ImageField(upload_to='barcode', blank=True, null=True)
+    STATUS_CHOICES = (
+        ('Pending', 'Pending'),
+        ('In Transit', 'In Transit'),
+        ('Shipped', 'Shipped'),
+        ('Out For Delivery', 'Out For Delivery'),
+        ('Delivered', 'Delivered'),
+    )
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING, )
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.shipment_no
+
+    # barcode generator
+    def save(self, *args, **kwargs):
+        EAN = barcode.get_barcode_class('code128')
+        ean = EAN(f'{self.shipment_no}', writer=ImageWriter())
+        buffer = BytesIO()
+        ean.write(buffer)
+        self.barcode.save('barcode.png', File(buffer), save=False)
+        return super().save(*args, **kwargs)
