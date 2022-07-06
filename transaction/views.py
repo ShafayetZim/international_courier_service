@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required
+from .utils import render_to_pdf
 from .forms import *
 from .models import *
 # Create your views here.
@@ -225,13 +226,13 @@ def shipment_edit(request, shipment_no):
     if request.method == 'GET':
         print("GET called")
         parent = get_object_or_404(Transaction, shipment_no=shipment_no)
-        sales_form = ShipmentCreateForm(instance=parent)
+        sales_form = ShipmentUpdateForm(instance=parent)
 
 
     elif request.method == 'POST':
         print("Post called")
         parent = get_object_or_404(Transaction, shipment_no=shipment_no)
-        sales_form = ShipmentCreateForm(request.POST, instance=parent)
+        sales_form = ShipmentUpdateForm(request.POST, instance=parent)
 
         if sales_form.is_valid():
             sales_parent = sales_form.save(commit=False)
@@ -255,8 +256,8 @@ def shipment_edit(request, shipment_no):
 
 class ShipmentUpdateView(SuccessMessageMixin, UpdateView):
     model = Transaction
-    form_class = ShipmentCreateForm
-    success_url = reverse_lazy('all-receivers')
+    form_class = ShipmentUpdateForm
+    success_url = reverse_lazy('all-shipments')
     template_name = 'update_shipment.html'
     success_message = "Shipment was updated successfully"
 
@@ -321,3 +322,48 @@ def receiver_info(request):
     }
     print(data)
     return JsonResponse(data, status=200)
+
+
+def print_invoice(request, shipment_no):
+    print(shipment_no)
+    shipment = Transaction.objects.get(shipment_no=shipment_no)
+
+    # print('%d in words is: %s' % (total_amount, getWords(total_amount)))
+
+    context = {
+        'title': "Shipment",
+        'nav_bar': "shipment_list",
+        'shipment': shipment,
+    }
+    pdf = render_to_pdf('invoice.html', context)
+    return HttpResponse(pdf, content_type='application/pdf')
+
+
+def airway_bill(request, shipment_no):
+    print(shipment_no)
+    shipment = Transaction.objects.get(shipment_no=shipment_no)
+
+    # print('%d in words is: %s' % (total_amount, getWords(total_amount)))
+
+    context = {
+        'title': "Shipment",
+        'nav_bar': "shipment_list",
+        'shipment': shipment,
+    }
+    pdf = render_to_pdf('airway_bill.html', context)
+    return HttpResponse(pdf, content_type='application/pdf')
+
+
+def money_receipt(request, shipment_no):
+    print(shipment_no)
+    shipment = Transaction.objects.get(shipment_no=shipment_no)
+
+    # print('%d in words is: %s' % (total_amount, getWords(total_amount)))
+
+    context = {
+        'title': "Shipment",
+        'nav_bar': "shipment_list",
+        'shipment': shipment,
+    }
+    pdf = render_to_pdf('money_receipt.html', context)
+    return HttpResponse(pdf, content_type='application/pdf')
