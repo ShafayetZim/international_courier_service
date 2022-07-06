@@ -44,7 +44,7 @@
                     <td style="text-align:center">{{item.courier}}</td>
                     <td style="text-align:center">{{item.awb_no}}</td>
                     <td style="text-align:center">{{item.destination_country}}</td>
-                    <td style="text-align:center">Pending</td>
+                    <td style="text-align:center">{{item.status}}</td>
                     <td style="text-align:center">
 
                        <a href="{% url 'update_shipment' item.shipment_no %}">
@@ -85,6 +85,17 @@
 
                             </div>
                         </div>
+
+                        <a href="{% url 'print-invoice' item.shipment_no %}">
+                            <button class="btn btn-outline-warning"><i class="fa fa-file"> </i></button>
+                       </a>
+                        <a href="{% url 'airway-bill' item.shipment_no %}">
+                            <button class="btn btn-outline-dark"><i class="fa fa-file"> </i></button>
+                       </a>
+
+                        <a href="{% url 'money-receipt' item.shipment_no %}">
+                            <button class="btn btn-outline-secondary"><i class="fa fa-file"> </i></button>
+                       </a>
 
                     </td>
 
