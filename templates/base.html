@@ -7,6 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="author" name="Shafayet Jamil" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"
@@ -110,7 +111,9 @@
     <div class="header-container fixed-top">
       <nav class="navbar navbar-light bg-light justify-content-between">
         <!--        <a class="navbar-brand ml-4"> <img src="{% static 'assets/img/somelogo.png' %}" class="navbar-logo" alt="logo" width="64" height="32" ><b>FTPC</b></a>-->
-        <a class="navbar-brand ml-4"> <b>TPC</b></a>
+        <a class="navbar-brand ml-4">
+          <span style="color: red"><b>The Professional Courier</b></span></a
+        >
 
         <!--        <p style="margin-top: 1em;margin-bottom: 1em;" class="mr-4"> <a href="https://www.ekattorit.com/" target="_blank"><span style="color:#444242">Developed By: </span><span style="color:#FF0000"><b>EKATTOR</b></span> <span style="color:green"><b>iT</b></span></a></a></p>-->
       </nav>
@@ -509,7 +512,7 @@
                 </div>
               </a>
               <ul
-                class="collapse submenu list-unstyled {% if nav_bar == 'shipper_list' or nav_bar == 'add_new_shipper' %} show {% endif %}"
+                class="collapse submenu list-unstyled {% if nav_bar == 'shipper_list' or nav_bar == 'new_shipper' %} show {% endif %}"
                 id="sales"
                 data-parent="#accordionExample"
               >
@@ -519,9 +522,9 @@
                   <a href="{% url 'all-shippers' %}">Shipper List</a>
                 </li>
                 <li
-                  class="{% if nav_bar == 'add_new_shipper' %} active {% endif %}"
+                  class="{% if nav_bar == 'new_shipper' %} active {% endif %}"
                 >
-                  <a href="{% url 'add-new-shipper' %}">New Shipper</a>
+                  <a href="{% url 'new-shipper' %}">New Shipper</a>
                 </li>
               </ul>
             </li>
@@ -581,7 +584,7 @@
                 </div>
               </a>
               <ul
-                class="collapse submenu list-unstyled {% if nav_bar == 'receiver_list' or nav_bar == 'add_new_receiver' %} show {% endif %}"
+                class="collapse submenu list-unstyled {% if nav_bar == 'receiver_list' or nav_bar == 'new_receiver' %} show {% endif %}"
                 id="accounts"
                 data-parent="#accordionExample"
               >
@@ -592,9 +595,9 @@
                 </li>
 
                 <li
-                  class="{% if nav_bar == 'add_new_receiver' %} active {% endif %}"
+                  class="{% if nav_bar == 'new_receiver' %} active {% endif %}"
                 >
-                  <a href="{% url 'add-new-receiver' %}">New Receiver </a>
+                  <a href="{% url 'new-receiver' %}">New Receiver </a>
                 </li>
               </ul>
             </li>
@@ -652,7 +655,7 @@
                 <li
                   class="{% if nav_bar == 'shipment_list' %} active {% endif %}"
                 >
-                  <a href="{% url 'shipment-list' %}">Shipment List</a>
+                  <a href="{% url 'all-shipments' %}">Shipment List</a>
                 </li>
 
                 <li
@@ -731,21 +734,25 @@
                 </div>
               </a>
               <ul
-                class="collapse submenu list-unstyled"
+                class="collapse submenu list-unstyled {% if nav_bar == 'user_list' or nav_bar == 'new_user' %} show {% endif %}"
                 id="users"
                 data-parent="#accordionExample"
               >
-                <li>
-                  <a href="userlist.html">User List</a>
+                <li class="{% if nav_bar == 'user_list' %} active {% endif %}">
+                  <a href="{% url 'all-users' %}">User List</a>
                 </li>
                 <li>
-                  <a href="adduser.html">Add User</a>
+                  <a href="{% url 'register' %}">Add User</a>
                 </li>
               </ul>
             </li>
 
             <li class="menu">
-              <a href="" aria-expanded="false" class="dropdown-toggle">
+              <a
+                href="{% url 'logout' %}"
+                aria-expanded="false"
+                class="dropdown-toggle"
+              >
                 <div class="">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -789,7 +796,10 @@
           {% endfor %} {% endif %}
         </p>
         {% block content %} {% endblock %}
+         <footer id="footer">Developed by: <span style="color: green">Ekattor</span> <span style="color: red">iT</span></footer>
       </div>
+
+
 
       <!--  END CONTENT AREA  -->
     </div>
