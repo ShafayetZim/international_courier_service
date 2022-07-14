@@ -16,7 +16,7 @@ from django.contrib import auth
 
 
 # Create your views here.
-
+@login_required
 def tpc_dashboard(request):
     context = {'title': 'Shipment',
                'nav_bar': 'dashboard',
