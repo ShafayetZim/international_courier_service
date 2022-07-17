@@ -162,44 +162,31 @@ input {
 <div class="col-lg-12 p-4">
         <div class="row">
             <div class="col-lg-12 col-12 layout-spacing">
-                <div class="statbox widget box box-shadow">
-                    <div class="widget-header">
-                        <div class="row">
-                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
 
-<!--                                <center>-->
-<!--                                    <h3><span style="color: LightCoral"><strong>New Shipment</strong></span></h3>-->
-<!--                                </center>-->
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="widget-content widget-content-area">
                         <form method="POST">
                             {% csrf_token %}
 
                         <!-- MultiStep Form -->
                             <h1 class="text-center">Shipment Update Form</h1>
-      <!-- Progress bar -->
-      <div class="progressbar">
-        <div class="progress" id="progress"></div>
+                          <!-- Progress bar -->
+                          <div class="progressbar">
+                            <div class="progress" id="progress"></div>
 
-        <div
-          class="progress-step progress-step-active"
-          data-title="Shipper"
-        ></div>
-        <div class="progress-step" data-title="Receiver"></div>
-        <div class="progress-step" data-title="Content"></div>
-        <div class="progress-step" data-title="Charge"></div>
-      </div>
+                            <div
+                              class="progress-step progress-step-active"
+                              data-title="Shipper"
+                            ></div>
+                            <div class="progress-step" data-title="Receiver"></div>
+                            <div class="progress-step" data-title="Content"></div>
+                            <div class="progress-step" data-title="Charge"></div>
+                          </div>
 
-      <!-- Steps -->
-      <div class="form-step form-step-active">
-        <div class="row">
+                          <!-- Steps -->
+                          <div class="form-step form-step-active">
+                            <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        {{ sales_form.status|as_crispy_field }}
+                                        {{ form.status|as_crispy_field }}
                                     </div>
                                 </div>
                                 <div class="col">
@@ -271,12 +258,12 @@ input {
                                 </div>
                             </div>
 
-        <div class="">
-          <a href="#" class="btn btn-next width-50 ml-auto">Next</a>
-        </div>
-      </div>
-      <div class="form-step">
-        <div class="row">
+                            <div class="">
+                              <a href="#" class="btn btn-next width-50 ml-auto">Next</a>
+                            </div>
+                          </div>
+                          <div class="form-step">
+                            <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         {{ form.receiver|as_crispy_field }}
@@ -351,13 +338,13 @@ input {
                                     </div>
                                 </div>
                             </div>
-        <div class="btns-group">
-          <a href="#" class="btn btn-prev">Previous</a>
-          <a href="#" class="btn btn-next">Next</a>
-        </div>
-      </div>
-      <div class="form-step">
-        <div class="row">
+                            <div class="btns-group">
+                              <a href="#" class="btn btn-prev">Previous</a>
+                              <a href="#" class="btn btn-next">Next</a>
+                            </div>
+                          </div>
+                          <div class="form-step">
+                            <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         {{ form.piece|as_crispy_field }}
@@ -409,13 +396,13 @@ input {
                                 </div>
                             </div>
 
-        <div class="btns-group">
-          <a href="#" class="btn btn-prev">Previous</a>
-          <a href="#" class="btn btn-next">Next</a>
-        </div>
-      </div>
-      <div class="form-step">
-        <div class="row">
+                            <div class="btns-group">
+                              <a href="#" class="btn btn-prev">Previous</a>
+                              <a href="#" class="btn btn-next">Next</a>
+                            </div>
+                          </div>
+                          <div class="form-step">
+                            <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         {{ form.currency|as_crispy_field }}
@@ -453,17 +440,14 @@ input {
                                     </div>
                                 </div>
                             </div>
-        <div class="btns-group">
-          <a href="#" class="btn btn-prev">Previous</a>
-          <input type="submit" value="Submit" class="btn" />
-        </div>
-      </div>
+                            <div class="btns-group">
+                              <a href="#" class="btn btn-prev">Previous</a>
+                              <input type="submit" value="Submit" class="btn" />
+                            </div>
+                          </div>
                         <!-- /.MultiStep Form -->
                         </form>
 
-                    </div>
-
-                </div>
             </div>
         </div>
 
