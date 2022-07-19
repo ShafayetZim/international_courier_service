@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
+from django.views.generic.base import View
 from django.views.generic import ListView, UpdateView, DetailView
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -8,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .utils import render_to_pdf
 from .forms import *
 from .models import *
+from django.urls import reverse
 # Create your views here.
 
 class AllShipperListView(ListView):
@@ -200,18 +202,25 @@ def new_shipment(request):
         print("Post called")
         sales_form = ShipmentCreateForm(request.POST)
 
-        if sales_form.is_valid():
-            sales_parent = sales_form.save(commit=False)
-            sales_parent.author = request.user
-            sales_parent.is_active = True
-            sales_parent.save()
+        if 'preview' in request.POST:
+            sales_form = ShipmentCreateForm(request.POST)
+        if 'submit' in request.POST:
 
-            messages.add_message(request, messages.SUCCESS, 'New Shipment Entry Successful')
-            return redirect('all-shipments')
+            if sales_form.is_valid():
+                sales_parent = sales_form.save(commit=False)
+                sales_parent.author = request.user
+                sales_parent.is_active = True
+                sales_parent.save()
 
-        else:
-            print("Not Valid Create Form")
-            print(sales_form.errors)
+                messages.add_message(request, messages.SUCCESS, 'New Shipment Entry Successful')
+                # return redirect('all-shipments')
+
+                def get_absolute_url(self):
+                    return reverse('shipment-edit', kwargs={'pk': self.pk})
+
+            else:
+                print("Not Valid Create Form")
+                print(sales_form.errors)
 
     return render(request, template_name, {
         'sales_form': sales_form,
@@ -272,6 +281,18 @@ class ShipmentDetailView(DetailView):
     model = Transaction
     template_name = 'shipment_detail.html'
     context_object_name = 'shipment'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Shipment Information"
+        context["nav_bar"] = "shipment_list"
+        return context
+
+
+class DetailView(DetailView):
+    model = Transaction
+    template_name = 'details.html'
+    context_object_name = 'sales_form'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
