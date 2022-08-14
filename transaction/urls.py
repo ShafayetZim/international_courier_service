@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+from django import forms
+from transaction.forms import ShipmentCreateForm
+from transaction.preview import TransactionFormPreview
 
 urlpatterns = [
     path('new-shipper', views.new_shipper, name="new-shipper"),
@@ -23,4 +26,6 @@ urlpatterns = [
     path('print-invoice/<str:shipment_no>', views.print_invoice, name='print-invoice'),
     path('airway-bill/<str:shipment_no>', views.airway_bill, name='airway-bill'),
     path('money-receipt/<str:shipment_no>', views.money_receipt, name='money-receipt'),
+    path('details/<str:pk>', views.DetailView.as_view(), name='details'),
+    # path('post/', TransactionFormPreview(ShipmentCreateForm)),
 ]
