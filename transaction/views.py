@@ -12,6 +12,7 @@ from .models import *
 from django.urls import reverse
 # Create your views here.
 
+
 class AllShipperListView(ListView):
     model = Sender  # Model I want to Covert to List
     template_name = 'shipper.html'  # Template Name
@@ -93,6 +94,7 @@ class ShipperDetailView(DetailView):
         context["nav_bar"] = "shipper_list"
         return context
 
+
 class AllReceiverListView(ListView):
     model = Receiver  # Model I want to Covert to List
     template_name = 'receiver.html'  # Template Name
@@ -106,7 +108,6 @@ class AllReceiverListView(ListView):
         context["nav_bar"] = "receiver_list"
         context['receiver'] = self.model.objects.all().order_by('-receiver_code')
         return context
-
 
 
 def new_receiver(request):
@@ -177,7 +178,7 @@ def receiver_delete(request, receiver_code):
 
 
 class AllShipmentListView(ListView):
-    model = Transaction  # Model I want to Covert to List
+    model = Transaction  # Model I want to Convert to List
     template_name = 'shipment.html'  # Template Name
     context_object_name = 'shipment'  # Change default name of objectList
     ordering = ['-shipment_no']  # Ordering post LIFO
@@ -237,7 +238,6 @@ def shipment_edit(request, shipment_no):
         parent = get_object_or_404(Transaction, shipment_no=shipment_no)
         sales_form = ShipmentUpdateForm(instance=parent)
 
-
     elif request.method == 'POST':
         print("Post called")
         parent = get_object_or_404(Transaction, shipment_no=shipment_no)
@@ -261,6 +261,20 @@ def shipment_edit(request, shipment_no):
         'title': 'New Sales',
         'nav_bar': 'new_sales',
     })
+
+
+class ShippingStatus(SuccessMessageMixin, UpdateView):
+    model = Transaction
+    form_class = ShippingStatusForm
+    success_url = reverse_lazy('all-shipments')
+    template_name = 'shipping_status.html'
+    success_message = "Shipping was updated successfully"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Update Shipping Status"
+        context["nav_bar"] = "shipment_list"
+        return context
 
 
 class ShipmentUpdateView(SuccessMessageMixin, UpdateView):
@@ -325,7 +339,6 @@ def shipper_info(request):
     }
     print(data)
     return JsonResponse(data, status=200)
-
 
 
 def receiver_info(request):
