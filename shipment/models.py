@@ -3,8 +3,8 @@ from django.db import models
 from django.utils import timezone
 import datetime
 from dataset.models import *
-
 # Create your models here.
+
 
 def shipment_no_generate():
     today_date = datetime.date.today()
@@ -28,6 +28,7 @@ def shipment_no_generate():
 
     # Return custom invoice number
     return prefix + next_shipment_no
+
 
 class Shipment(models.Model):
     created_at = models.DateTimeField(blank=True, null=True, auto_now_add=True)
