@@ -20,6 +20,7 @@ urlpatterns = [
     path('detail-shipment/<str:pk>', views.ShipmentDetailView.as_view(), name='detail_shipment'),
     path('shipment-delete/<str:shipment_no>', views.shipment_delete, name="shipment-delete"),
     path('shipment-edit/<str:shipment_no>', views.shipment_edit, name="shipment-edit"),
+    path('shipping-status/<str:pk>', views.ShippingStatus.as_view(), name="shipping-status"),
     path('update-shipment/<str:pk>', views.ShipmentUpdateView.as_view(), name='update_shipment'),
     path('shipper-information', views.shipper_info, name="shipper-information"),
     path('receiver-information', views.receiver_info, name="receiver-information"),

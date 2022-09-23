@@ -9,6 +9,7 @@ from django.core.files import File
 
 # Create your models here.
 
+
 def shipper_code():
     prifix = "S-"
     next_number = '00001'
@@ -17,6 +18,7 @@ def shipper_code():
         last_code = int(last_number.shipper_code[4:])
         next_number = '{0:05d}'.format(last_code + 1)
     return prifix + next_number
+
 
 class Sender(models.Model):
     created_at = models.DateTimeField(blank=True, null=True, auto_now_add=True)
@@ -45,6 +47,7 @@ def receiver_code():
         last_code = int(last_number.receiver_code[4:])
         next_number = '{0:05d}'.format(last_code + 1)
     return prifix + next_number
+
 
 class Receiver(models.Model):
     created_at = models.DateTimeField(blank=True, null=True, auto_now_add=True)
@@ -75,14 +78,14 @@ def shipment_no_generate():
     # For the very first time shipment_number is DD-MM-YY-0001
     next_shipment_no = '0001'
 
-    # Get Last Employee Start With TPC-
+    # Get Last Shipment Start With TPC-
     last_shipment_no = Transaction.objects.filter(shipment_no__startswith=prefix).order_by('shipment_no').last()
 
     if last_shipment_no:
-        # Cut 5 digit from the Right and converted to int (STC-YYYY-:xxxx)
+        # Cut 4 digit from the Right and converted to int (STC-YYYY-:xxxx)
         last_shipment_four_digit = int(last_shipment_no.shipment_no[-4:])
 
-        # Increment one with last five digit
+        # Increment one with last four digit
         next_shipment_no = '{0:04d}'.format(last_shipment_four_digit + 1)
 
     # Return custom shipment number
