@@ -79,7 +79,7 @@ class ShipmentCreateForm(forms.ModelForm):
             'destination_country': forms.Select(
                 attrs={'required': True, 'class': 'form-control'}
             ),
-             'ref_no': forms.TextInput(attrs={'class': 'form-control'}),
+            'ref_no': forms.TextInput(attrs={'class': 'form-control'}),
             'courier': forms.Select(
                 attrs={'required': True, 'class': 'form-control'}
             ),
@@ -172,5 +172,16 @@ class ShipmentUpdateForm(forms.ModelForm):
             'third_party_amount': forms.TextInput(attrs={'class': 'form-control'}),
             'cheque_no': forms.TextInput(attrs={'class': 'form-control'}),
             'account_no': forms.TextInput(attrs={'class': 'form-control'}),
+
+        }
+
+
+class ShippingStatusForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = ('status', )
+
+        widgets = {
+            'status': forms.Select(attrs={'class': 'form-control', 'required': True}),
 
         }
