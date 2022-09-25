@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 import datetime
 
+
 def customer_code():
     prifix = "TPC-"
     next_number = '00001'
@@ -10,6 +11,7 @@ def customer_code():
         last_code = int(last_number.customer_code[4:])
         next_number = '{0:05d}'.format(last_code + 1)
     return prifix + next_number
+
 
 class Customers(models.Model):
     created_at = models.DateTimeField(blank=True, null=True, auto_now_add=True)
@@ -35,6 +37,7 @@ def shipper_code():
         last_code = int(last_number.shipper_code[4:])
         next_number = '{0:05d}'.format(last_code + 1)
     return prifix + next_number
+
 
 class Shipper(models.Model):
     created_at = models.DateTimeField(blank=True, null=True, auto_now_add=True)
