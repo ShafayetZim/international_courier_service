@@ -16,7 +16,7 @@
 body {
   font-family: Montserrat, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  display: grid;
+  display: inline;
   place-items: center;
   min-height: 100vh;
 }
@@ -159,301 +159,805 @@ input {
 </style>
 
 
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <div class="col-lg-12 p-4">
-        <div class="row">
-            <div class="col-lg-12 col-12 layout-spacing">
+    <div class="row">
+        <div class="col-lg-12 col-12 layout-spacing">
 
-                        <form method="POST">
-                            {% csrf_token %}
+            <form method="POST" id="myform">
+                {% csrf_token %}
 
-                        <!-- MultiStep Form -->
-                            <h1 class="text-center">Shipment Form</h1>
-                          <!-- Progress bar -->
-                          <div class="progressbar">
-                            <div class="progress" id="progress"></div>
+            <!-- MultiStep Form -->
+                <h1 class="text-center">Shipment Form</h1>
+              <!-- Progress bar -->
+              <div class="progressbar">
+                <div class="progress" id="progress"></div>
 
-                            <div
-                              class="progress-step progress-step-active"
-                              data-title="Shipper"
-                            ></div>
-                            <div class="progress-step" data-title="Receiver"></div>
-                            <div class="progress-step" data-title="Content"></div>
-                            <div class="progress-step" data-title="Charge"></div>
-                          </div>
+                <div
+                  class="progress-step progress-step-active"
+                  data-title="Shipper"
+                ></div>
+                <div class="progress-step" data-title="Receiver"></div>
+                <div class="progress-step" data-title="Content"></div>
+                <div class="progress-step" data-title="Charge"></div>
+                <div class="progress-step" data-title="Review"></div>
+              </div>
 
-                          <!-- Steps -->
-                          <div class="form-step form-step-active">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.shipment_date|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.shipper_account|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
+              <!-- Steps -->
+              <div class="form-step form-step-active">
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.shipment_date|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.shipper_account|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.shipper|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.shipper_address|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.shipper|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.shipper_address|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.shipper_city|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.shipper_state|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.shipper_zip|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.shipper_name|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.shipper_mobile|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.shipper_telephone|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.origin_country|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.destination_country|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.shipper_city|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.shipper_state|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.shipper_zip|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.shipper_name|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+                 <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.shipper_mobile|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.shipper_telephone|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between ml-3 mr-2 mb-3">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.origin_country|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.destination_country|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="">
-                              <a href="#" class="btn btn-next width-50 ml-auto">Next</a>
-                            </div>
-                          </div>
-                          <div class="form-step">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.receiver|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.receiver_address|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
+                <div class="">
+                  <a href="#" class="btn btn-next width-50 ml-auto">Next</a>
+                </div>
+              </div>
+              <div class="form-step">
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.receiver|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.receiver_address|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.receiver_city|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.receiver_state|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.receiver_zip|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.receiver_name|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.receiver_mobile|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.receiver_telephone|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.receiver_city|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.receiver_state|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.receiver_zip|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.receiver_name|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+                 <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.receiver_mobile|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.receiver_telephone|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.ref_no|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.courier|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
+                <div class="row row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.ref_no|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.courier|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.awb_no|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.content|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="btns-group">
-                              <a href="#" class="btn btn-prev">Previous</a>
-                              <a href="#" class="btn btn-next">Next</a>
-                            </div>
-                          </div>
-                          <div class="form-step">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.piece|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.weight|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
+                <div class="row justify-content-between ml-3 mr-2 mb-3">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.awb_no|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.content|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+                <div class="btns-group">
+                  <a href="#" class="btn btn-prev">Previous</a>
+                  <a href="#" class="btn btn-next">Next</a>
+                </div>
+              </div>
+              <div class="form-step">
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.piece|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.weight|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.remark|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.height|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.remark|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.height|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
 
-                             <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.width|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.length|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
+                 <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.width|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.length|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
 
-                             <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.pickup_by|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.pickup_date|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
+                 <div class="row justify-content-between ml-3 mr-2 mb-3">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.pickup_by|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.pickup_date|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="btns-group">
-                              <a href="#" class="btn btn-prev">Previous</a>
-                              <a href="#" class="btn btn-next">Next</a>
-                            </div>
-                          </div>
-                          <div class="form-step">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.currency|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.prepaid_amount|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
+                <div class="btns-group">
+                  <a href="#" class="btn btn-prev">Previous</a>
+                  <a href="#" class="btn btn-next">Next</a>
+                </div>
+              </div>
+              <div class="form-step">
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.currency|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.prepaid_amount|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
 
-                             <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.collect_amount|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.third_party_amount|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
+                 <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.collect_amount|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.third_party_amount|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
 
-                             <div class="row mb-3">
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.cheque_no|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        {{ sales_form.account_no|as_crispy_field }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="btns-group">
-                              <a href="#" class="btn btn-prev">Previous</a>
-                              <input type="submit" name="preview" id="preview" value="preview" class="btn" />
-                              <input type="submit" name="submit" id="submit" value="Submit" class="btn" />
-                            </div>
-                          </div>
-                        <!-- /.MultiStep Form -->
-                        </form>
+                 <div class="row justify-content-between ml-3 mr-2 mb-3">
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.cheque_no|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            {{ sales_form.account_no|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+                  <div class="btns-group">
+                  <a href="#" class="btn btn-prev">Previous</a>
+                  <a href="#" class="btn btn-next">Next</a>
+                </div>
+<!--                <div class="btns-group">-->
+<!--                  <a href="#" class="btn btn-prev">Previous</a>-->
+<!--                  <input type="submit" name="preview" id="preview" value="Preview" class="btn" />-->
+<!--                  <input type="submit" name="submit" id="submit" value="Submit" class="btn" />-->
+<!--                    <button type="button" class="btn text-uppercase" data-toggle="modal" data-target="#myModal">Preview</button>-->
+<!--                </div>-->
+              </div>
 
+                <div class="form-step">
+                    <h3 class="ml-3" style="color:red">Shipper Details:</h3><hr />
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="db">
+                              Address Street: <input type="text" name="p_Address_Street" id="p_Address_Street" size="36" value="" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="sn">
+                                Shipper Name: <input type="text" name="sn" id="2" size="36" value="" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="sa">
+                                Shipper Address: <input type="text" name="sa" id="3" size="36" value="" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                           <div id="sc">
+                                Shipper City: <input type="text" name="sc" id="4" size="36" value="" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="ss">
+                                Shipper State: <input type="text" name="ss" id="5" size="36" value="" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="sz">
+                                Shipper Zip: <input type="text" name="sz" id="6" size="36" value="" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="sm">
+                                Shipper Mobile: <input type="text" name="sm" id="7" size="36" value="" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="st">
+                                Shipper Telephone: <input type="text" name="st" id="8" size="36" value="" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="ml-3" style="color:red">Country From-To:</h3><hr />
+
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="oc">
+                              Origin Country: <input type="text" name="oc" id="9" size="36" value="" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="dc">
+                                Destination Country: <input type="text" name="dc" id="10" size="36" value="" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="ml-3" style="color:red">Receiver Details:</h3><hr />
+
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="rn">
+                              Receiver Name: <input type="text" name="rn" id="11" size="36" value="" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="r">
+                                Nothing:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="ra">
+                              Receiver Address:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="rc">
+                                Receiver City:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="rs">
+                              Receiver State:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="rz">
+                                Receiver Zip:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="rm">
+                              Receiver Mobile:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="rt">
+                                Receiver Telephone:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="ml-3" style="color:red">Content Details:</h3><hr />
+
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="ref">
+                              Ref no:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="cr">
+                                Courier:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="pc">
+                              Piece:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="wt">
+                                Weight:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="rmk">
+                              Remark:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="ht">
+                                Height:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="wdh">
+                              Width:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="lgh">
+                                Length:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="pub">
+                              Pickup by:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="pud">
+                                Pickup date:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="ml-3" style="color:red">Charge Details:</h3><hr/>
+
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="cry">
+                              Currency:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="pa">
+                                Prepaid Amount:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="ca">
+                              Collect Amount:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="tpa">
+                                Third Party Amount:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-between ml-3 mr-2">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="cn">
+                              Cheque no:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <div id="an">
+                                Account no:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btns-group">
+                  <a href="#" class="btn btn-prev">Previous</a>
+<!--                  <input type="submit" name="preview" id="preview" value="Preview" class="btn" />-->
+                  <input type="submit" name="submit" id="submit" value="Submit" class="btn" />
+                    <button type="button" class="btn text-uppercase" data-toggle="modal" data-target="#myModal">Preview</button>
+                    <input type="button" value="Preview" class="preview_button">
+                </div>
+
+              </div>
+
+            <!-- /.MultiStep Form -->
+            </form>
+
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Preview Shipment Data</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                      &times;
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div id="formPreview"></div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-dark" data-dismiss="modal">
+                        Cancel
+                      </button>
+                      <button id="formSubmit" type="button" class="btn btn-primary">
+                        Submit
+                      </button>
+                      <!--                                        <a href=""-->
+                      <!--                                           class="btn btn-danger">Delete</a>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+
         </div>
+    </div>
 
 </div>
 
+<script>
+         $('#myModal').on('shown.bs.modal', function () {
+
+             //1- Get the value from form
+             var table = '<table>'
+             $("#myform input").each(function(){
+                    console.log($(this).attr('name'), $(this).val())
+                 table += '<tr><td>'+$(this).attr('name')+'</td><td>'+$(this).val()+'</td></tr>'
+             })
+
+             table += '</table>'
+
+             //2- Set the value in Modal
+             $('#formPreview').html(table)
+
+           })
+
+           $('#formSubmit').on('click', function (){
+                $("#myform").submit();
+           })
+
+           $('#preview-submit').click(function(){
+                alert('submitting');
+                $('#myform').submit();
+            });
+</script>
+
+<script>
+$(document).ready(function(){
+  $('div#db').hide();
+  $('div#sn').hide();
+  $('div#sa').hide();
+  $('div#sc').hide();
+  $('div#ss').hide();
+  $('div#sz').hide();
+  $('div#sm').hide();
+  $('div#st').hide();
+  $('div#oc').hide();
+  $('div#dc').hide();
+  $('div#r').hide();
+  $('div#rn').hide();
+  $('div#ra').hide();
+  $('div#rc').hide();
+  $('div#rs').hide();
+  $('div#rz').hide();
+  $('div#rm').hide();
+  $('div#rt').hide();
+
+  $('div#ref').hide();
+  $('div#cr').hide();
+  $('div#awb').hide();
+  $('div#ct').hide();
+
+  $('div#pc').hide();
+  $('div#wt').hide();
+  $('div#rmk').hide();
+  $('div#ht').hide();
+  $('div#wdh').hide();
+  $('div#lgh').hide();
+  $('div#pub').hide();
+  $('div#pud').hide();
+
+  $('div#cry').hide();
+  $('div#pa').hide();
+  $('div#ca').hide();
+  $('div#tpa').hide();
+  $('div#cn').hide();
+  $('div#an').hide();
+
+    $('input.preview_button').on('click', function(e){
+      e.preventDefault();
+      shipperAccount = $('input#id_shipper_account').val();
+      shipperAddress = $('input#id_shipper_address').val();
+      shipperCity = $('input#id_shipper_city').val();
+      shipperState = $('input#id_shipper_state').val();
+      shipperZip = $('input#id_shipper_zip').val();
+      shipperName = $('input#id_shipper_name').val();
+      shipperMobile = $('input#id_shipper_mobile').val();
+      shipperTelephone = $('input#id_shipper_telephone').val();
+
+      originCountry = $('select#id_origin_country').val();
+      destinationCountry = $('select#id_destination_country').val();
+
+      receiverAddress = $('input#id_receiver_address').val();
+      receiverCity = $('input#id_receiver_city').val();
+      receiverState = $('input#id_receiver_state').val();
+      receiverZip = $('input#id_receiver_zip').val();
+      receiverName = $('input#id_receiver_name').val();
+      receiverMobile = $('input#id_receiver_mobile').val();
+      receiverTelephone = $('input#id_receiver_telephone').val();
+
+      ref = $('input#id_ref_no').val();
+      courier = $('select#id_courier').val();
+      awb = $('input#id_awb_no').val();
+      content = $('select#id_content').val();
+
+      piece = $('input#id_piece').val();
+      weight = $('input#id_weight').val();
+      remark = $('input#id_remark').val();
+      height = $('input#id_height').val();
+      width = $('input#id_width').val();
+      length = $('input#id_length').val();
+      pickBy = $('input#id_pickup_by').val();
+      pickDate = $('input#id_pickup_date').val();
+
+      currency = $('select#id_currency').val();
+      prepaid = $('input#id_prepaid_amount').val();
+      collect = $('input#id_collect_amount').val();
+      thirdParty = $('input#id_third_party_amount').val();
+      cheque = $('input#id_cheque_no').val();
+      account = $('input#id_account_no').val();
+
+      var text = "";
+      text += "phase1"+'<br />';
+      $('div#db').empty().html("<b>" + "Shipper Account:" + "</b>" + "<br />" +shipperAccount).show();
+      $('div#sn').empty().html("<b>" + "Shipper Name:" + "</b>" + "<br />" + shipperName).show();
+      $('div#sa').empty().html("<b>" + "Shipper Address:" + "</b>" + "<br />" + shipperAddress).show();
+      $('div#sc').empty().html("<b>" + "Shipper City:" + "</b>" + "<br />" + shipperCity).show();
+      $('div#ss').empty().html("<b>" + "Shipper State:" + "</b>" + "<br />" + shipperState).show();
+      $('div#sz').empty().html("<b>" + "Shipper Zip:" + "</b>" + "<br />" + shipperZip).show();
+      $('div#sm').empty().html("<b>" + "Shipper Mobile:" + "</b>" + "<br />" + shipperMobile).show();
+      $('div#st').empty().html("<b>" + "Shipper Telephone:" + "</b>" + "<br />" + shipperTelephone).show();
+
+      $('div#oc').empty().html("<b>" + "Origin Country:" + "</b>" + "<br />" + originCountry).show();
+      $('div#dc').empty().html("<b>" + "Destination Country:" + "</b>" + "<br />" + destinationCountry).show();
+
+      $('div#rn').empty().html("<b>" + "Receiver Name:" + "</b>" + "<br />" + receiverName).show();
+      $('div#ra').empty().html("<b>" + "Receiver Address:" + "</b>" + "<br />" + receiverAddress).show();
+      $('div#rc').empty().html("<b>" + "Receiver City:" + "</b>" + "<br />" + receiverCity).show();
+      $('div#rs').empty().html("<b>" + "Receiver State:" + "</b>" + "<br />" + receiverState).show();
+      $('div#rz').empty().html("<b>" + "Receiver Zip:" + "</b>" + "<br />" + receiverZip).show();
+      $('div#rm').empty().html("<b>" + "Receiver Mobile:" + "</b>" + "<br />" + receiverMobile).show();
+      $('div#rt').empty().html("<b>" + "Receiver Telephone:" + "</b>" + "<br />" + receiverTelephone).show();
+
+      $('div#ref').empty().html("<b>" + "Ref No:" + "</b>" + "<br />" + ref).show();
+      $('div#cr').empty().html("<b>" + "Courier:" + "</b>" + "<br />" + courier).show();
+      $('div#awb').empty().html("<b>" + "Awb No:" + "</b>" + "<br />" + awb).show();
+      $('div#ct').empty().html("<b>" + "Content:" + "</b>" + "<br />" + content).show();
+
+      $('div#pc').empty().html("<b>" + "Piece:" + "</b>" + "<br />" + piece).show();
+      $('div#wt').empty().html("<b>" + "Weight:" + "</b>" + "<br />" + weight).show();
+      $('div#rmk').empty().html("<b>" + "Remark:" + "</b>" + "<br />" + remark).show();
+      $('div#ht').empty().html("<b>" + "Height:" + "</b>" + "<br />" + height).show();
+      $('div#wdh').empty().html("<b>" + "Width:" + "</b>" + "<br />" + width).show();
+      $('div#lgh').empty().html("<b>" + "Length:" + "</b>" + "<br />" + length).show();
+      $('div#pub').empty().html("<b>" + "Pickup by:" + "</b>" + "<br />" + pickBy).show();
+      $('div#pud').empty().html("<b>" + "Pickup Date:" + "</b>" + "<br />" + pickDate).show();
+
+      $('div#cry').empty().html("<b>" + "Currency:" + "</b>" + "<br />" + currency).show();
+      $('div#pa').empty().html("<b>" + "Prepaid Amount:" + "</b>" + "<br />" + prepaid).show();
+      $('div#ca').empty().html("<b>" + "Collect Amount:" + "</b>" + "<br />" + collect).show();
+      $('div#tpa').empty().html("<b>" + "Third Party Amount:" + "</b>" + "<br />" + thirdParty).show();
+      $('div#cn').empty().html("<b>" + "Cheque No:" + "</b>" + "<br />" + cheque).show();
+      $('div#an').empty().html("<b>" + "Account No:" + "</b>" + "<br />" + account).show();
+    });
+
+});
+</script>
 
 <script>
 
