@@ -46,6 +46,7 @@
 
                         <div class="text-center">
                             <input type="submit" class="btn btn-primary">
+                            <input type="button" value="Preview" class="preview_button">
                         </div>
 
                     </form>
@@ -53,9 +54,25 @@
                 </div>
 
                 </form>
+
+                <div id="db">
+                  Address Street: <input type="text" name="p_Address_Street" id="p_Address_Street" size="36" value="" readonly="readonly">
+                </div>
+
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+      $('div#db').hide();
 
+        $('input.preview_button').on('click', function(e){
+          e.preventDefault();
+          add = $('input#id_name').val();
+          $('div#db').empty().html(add).show();
+        });
+
+    })
+</script>
 {% endblock content %}
