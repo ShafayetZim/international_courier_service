@@ -19,7 +19,8 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('shipment.urls')),
+    path('', include('webApp.urls')),
+    path('dashboard', include('shipment.urls')),
     path('dataset/', include('dataset.urls')),
     path('sales/', include('sales.urls')),
     path('transaction/', include('transaction.urls')),

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'shipment',
     'sales',
     'transaction',
+    'webApp',
     'crispy_forms',
     'formtools',
 ]
