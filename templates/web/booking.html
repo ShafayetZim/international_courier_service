@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 
 <head>
@@ -368,76 +369,182 @@
 										<div class="title2 title4">
 											<strong>Company Overview</strong>
 											<p>WE OFFER QUICK & POWERFUL SOLUTION</p>
+											<h2>ENTER YOUR BOOKING DETAILS</h2>
 										</div>
-										<h2>ENTER YOUR BOOKING DETAILS</h2>
 
 										<div class="booking-form">
-											<form>
+											<form method="POST" onsubmit="alert('Success. Thank You For Your Booking With TPC.');">
+												{% csrf_token %}
+
 												<div class="row">
+													<h4 class="">Sender Information</h4><br />
 													<div class="col-md-6">
-														<div class="select-service select-box">
-															<select>
-																<option>From City ( Branch )</option>
-																<option>Air</option>
-																<option>Ocean</option>
-															</select>
-														</div>
+														Name:
+														{{ booking_form.sender_attention }}
 													</div>
 
 													<div class="col-md-6">
-														<div class="select-from select-box">
-															<select>
-																<option>To City</option>
-																<option>Air</option>
-																<option>Ocean</option>
-															</select>
-														</div>
+														Company:
+														{{ booking_form.sender_company }}
 													</div>
 
 													<div class="col-md-6">
-														<div class="select-goods select-box">
-															<select>
-																<option>Choose Service</option>
-																<option>Air</option>
-																<option>Ocean</option>
-															</select>
-														</div>
+														Address:
+														{{ booking_form.sender_address }}
 													</div>
 
 													<div class="col-md-6">
-														<div class="datepicker-field">
-															<input class="datepicker" id="datepicker" type="text" placeholder="Select Date" />
-														</div>
-													</div>
-
-													<div class="col-md-12">
-														<label><input type="text" class="text-field" placeholder="Sender Name" /></label>
+														City:
+														{{ booking_form.sender_city }}
 													</div>
 
 													<div class="col-md-6">
-														<label><i class="fa fa-envelope"></i><input type="email" class="text-field" placeholder="Email Address" /></label>
+														Zip:
+														{{ booking_form.sender_zip }}
 													</div>
 
 													<div class="col-md-6">
-														<label><i class="fa fa-phone"></i><input type="text" class="text-field" placeholder="Phone No" /></label>
+														Sender Country:
+														{{ booking_form.sender_country }}
 													</div>
 
-													<div class="col-md-12">
-														<label><input type="text" class="text-field" placeholder="Address" /></label>
+													<div class="col-md-6">
+														Phone:
+														{{ booking_form.sender_phone }}
 													</div>
 
-													<div class="col-md-12">
-														<textarea class="text-field" placeholder="Summery"></textarea>
+													<div class="col-md-6">
+														Email:
+														{{ booking_form.sender_email }}
 													</div>
 
-													<div class="col-md-12">
+													<div class="col-md-6">
+														NID / Passport:
+														{{ booking_form.sender_nid }}
+													</div>
+												</div>
+
+												<div class="row">
+													<p>&nbsp; </p>
+													<h4 class="">Receiver Information</h4><br />
+													<div class="col-md-6">
+														Name:
+														{{ booking_form.receiver_attention }}
+													</div>
+
+													<div class="col-md-6">
+														Company:
+														{{ booking_form.receiver_company }}
+													</div>
+
+													<div class="col-md-6">
+														Address:
+														{{ booking_form.receiver_address }}
+													</div>
+
+													<div class="col-md-6">
+														City:
+														{{ booking_form.receiver_city }}
+													</div>
+
+													<div class="col-md-6">
+														Zip:
+														{{ booking_form.receiver_zip }}
+													</div>
+
+													<div class="col-md-6">
+														Receiver Country:
+														{{ booking_form.receiver_country }}
+													</div>
+
+													<div class="col-md-6">
+														Phone:
+														{{ booking_form.receiver_phone }}
+													</div>
+
+													<div class="col-md-6">
+														Email:
+														{{ booking_form.receiver_email }}
+													</div>
+
+													<div class="col-md-6">
+														NID / Passport:
+														{{ booking_form.receiver_nid }}
+													</div>
+												</div>
+
+												<div class="row">
+													<p>&nbsp; </p>
+													<h4 class="">Shipping Information</h4><br />
+													<div class="col-md-6">
+														Payment Type:
+														{{ booking_form.payment }}
+													</div>
+
+													<div class="col-md-6">
+														Ship Reference:
+														{{ booking_form.ship_ref }}
+													</div>
+
+													<div class="col-md-6">
+														Weight:
+														{{ booking_form.weight }}
+													</div>
+
+													<div class="col-md-6">
+														Piece:
+														{{ booking_form.piece }}
+													</div>
+
+													<div class="col-md-6">
+														Product Value:
+														{{ booking_form.product_value }}
+													</div>
+
+													<div class="col-md-6">
+														Item:
+														{{ booking_form.item }}
+													</div>
+
+													<div class="col-md-6">
+														Remarks:
+														{{ booking_form.remarks }}
+													</div>
+
+													<div class="col-md-6">
+														Item Description:
+														{{ booking_form.description }}
+													</div>
+
+													<div class="col-md-6">
+														Length:
+														{{ booking_form.length }}
+													</div>
+
+													<div class="col-md-6">
+														Height:
+														{{ booking_form.height }}
+													</div>
+
+													<div class="col-md-6">
+														Width:
+														{{ booking_form.width }}
+													</div>
+												</div>
+
+												<div class="row">
+
+													<div class="col-md-12 cb">
 														<div class="terms-services">
 															<span>
-																<input tabindex="23" type="checkbox" id="field116" />
-																<label for="field116">I agree to the TPC <a href="#" title="">Terms of Service</a> and <a href="#" title="">Privacy Policy</a></label>
+																<input tabindex="23" type="checkbox" class="" id="field116" required />
+																<label for="field116" style="border-style: none;">I agree to the TPC <a href="#" title="">Terms of Service</a> and <a href="#" title="">Privacy Policy</a></label>
 															</span>
 														</div>
-														<a title="" href="#" data-toggle="modal" data-target="#submission-message" class="theme-btn"><i class="fa fa-paper-plane"></i>BOOK NOW</a>
+														<div class="col-md-12 text-center">
+															<input type="submit" class="btn btn-primary">
+														</div>
+<!--														<a title="" href="#" data-toggle="modal" data-target="#submission-message" class="theme-btn"><i class="fa fa-paper-plane"></i>BOOK NOW</a>-->
 													</div>
 												</div>
 											</form>
@@ -538,7 +645,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6 column">
-							<span>&copy; 2022 <a itemprop="url" title="" href="{% url 'index' %}">The Professional Courier</a> - All Rights Reserved - Made By Webinane</span>
+							<span>&copy; 2022 <a itemprop="url" title="" href="{% url 'index' %}">The Professional Courier</a> - All Rights Reserved</span>
 						</div>
 						<div class="col-md-6 column">
                             <span><a itemprop="url" title="" href="https://ekattorit.com/" target="_blank">Developed & Maintained by: <b style="color: green;">EKATTOR</b><b style="color: red;"> iT</b></span>
