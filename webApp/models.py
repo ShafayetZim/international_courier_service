@@ -44,8 +44,8 @@ class Booking(models.Model):
         ('Envelope', 'Envelope'),
     )
     item = models.CharField(max_length=20, choices=ITEM_CHOICES, default='Sample')
-    remarks = models.CharField(max_length=100, blank=True, null=True)
-    description = models.CharField(max_length=100, blank=True, null=True)
+    remarks = models.CharField(max_length=200, blank=True, null=True)
+    description = models.CharField(max_length=200, blank=True, null=True)
     length = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
     height = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
     width = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
@@ -53,3 +53,4 @@ class Booking(models.Model):
 
     def __str__(self):
         return self.sender_attention
+
