@@ -31,7 +31,7 @@
             <div class="logo-menu-sec">
                 <div class="logo-menu">
                     <div class="logo">
-                        <a itemprop="url" href="{% url 'index' %}" title=""><img itemprop="image" src="{% static 'web/images/resource/logo3.png' %}" alt="" /></a>
+                        <a itemprop="url" href="{% url 'index' %}" title=""><img itemprop="image" src="{% static 'web/images/resource/tpc-logo.png' %}" alt="" /></a>
                     </div>
                     <div class="quick-contact">
                         <ul>
@@ -60,6 +60,13 @@
                         <li><a itemprop="url" href="{% url 'about' %}" title="">ABOUT</a></li>
 
                         <li><a itemprop="url" href="{% url 'service' %}" title="">SERVICE</a></li>
+
+						<li class="menu-item-has-children"><a itemprop="url" href="{% url 'service' %}" title="">PAGES</a>
+                            <ul>
+                                <li><a itemprop="url" href="{% url 'booking' %}" title="">Online Booking</a></li>
+                                <li><a itemprop="url" href="{% url 'volume' %}" title="">Volume Calculator</a></li>
+                            </ul>
+                        </li>
 
                         <li><a itemprop="url" href="{% url 'gallery' %}" title="">GALLERY</a></li>
 
@@ -108,7 +115,7 @@
                 <div class="container">
                     <div class="responsive-logo">
                         <div class="logo">
-                            <a itemprop="url" href="{% url 'index' %}" title=""><img itemprop="image" src="{% static 'web/images/resource/logo3.png' %}" alt="" /></a>
+                            <a itemprop="url" href="{% url 'index' %}" title=""><img itemprop="image" src="{% static 'web/images/resource/tpc-logo.png' %}" alt="" /></a>
                         </div>
                     </div>
                     <span class="responsive-btn"><i class="fa fa-list"></i></span>
@@ -125,16 +132,13 @@
                             </li>
                             <li><a itemprop="url" href="{% url 'service' %}" title="">SERVICES</a>
                             </li>
-                            <li><a itemprop="url" href="{% url 'gallery' %}" title="">GALLERY</a>
-                            </li>
                             <li class="menu-item-has-children"><a itemprop="url" href="#" title="">PAGES</a>
                                 <ul>
-                                    <li><a itemprop="url" href="makeus-different.html" title="">Make Us Different</a></li>
-                                    <li><a itemprop="url" href="404.html" title="">404</a></li>
-                                    <li><a itemprop="url" href="search-found.html" title="">Search Found</a></li>
-                                    <li><a itemprop="url" href="search-not-found.html" title="">Search not Found</a></li>
-                                    <li><a itemprop="url" href="about.html" title="">About</a></li>
+                                    <li><a itemprop="url" href="{% url 'booking' %}" title="">Online Booking</a></li>
+                                	<li><a itemprop="url" href="{% url 'volume' %}" title="">Volume Calculator</a></li>
                                 </ul>
+                            </li>
+							<li><a itemprop="url" href="{% url 'gallery' %}" title="">GALLERY</a>
                             </li>
                             <li><a itemprop="url" href="{% url 'contact' %}" title="">CONTACT</a></li>
                         </ul>
@@ -470,7 +474,7 @@
 									<div class="widget">
 										<div class="about-widget">
 											<div class="logo">
-												<a itemprop="url" href="{% url 'index' %}" title=""><img itemprop="image" src="{% static 'web/images/resource/logo3.png' %}" alt="" /></a>
+												<a itemprop="url" href="{% url 'index' %}" title=""><img itemprop="image" src="{% static 'web/images/resource/tpc-logo.png' %}" alt="" /></a>
 											</div>
 											<p itemprop="description">The Professional Courier provides domestic & international courier service. The Professional Courier is one of the largest air freight transportation providers in the world.</p>
 											<ul class="social-btn">
