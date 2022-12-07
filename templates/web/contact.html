@@ -33,7 +33,7 @@
             <div class="logo-menu-sec">
                 <div class="logo-menu">
                     <div class="logo">
-                        <a itemprop="url" href="{% url 'index' %}" title=""><img itemprop="image" src="{% static 'web/images/resource/logo3.png' %}" alt="" /></a>
+                        <a itemprop="url" href="{% url 'index' %}" title=""><img itemprop="image" src="{% static 'web/images/resource/tpc-logo.png' %}" alt="" /></a>
                     </div>
                     <div class="quick-contact">
                         <ul>
@@ -62,6 +62,13 @@
                         <li><a itemprop="url" href="{% url 'about' %}" title="">ABOUT</a></li>
 
                         <li><a itemprop="url" href="{% url 'service' %}" title="">SERVICE</a></li>
+
+                        <li class="menu-item-has-children"><a itemprop="url" href="" title="">PAGES</a>
+                            <ul>
+                                <li><a itemprop="url" href="{% url 'booking' %}" title="">Online Booking</a></li>
+                                <li><a itemprop="url" href="{% url 'volume' %}" title="">Volume Calculator</a></li>
+                            </ul>
+                        </li>
 
                         <li><a itemprop="url" href="{% url 'gallery' %}" title="">GALLERY</a></li>
 
@@ -110,7 +117,7 @@
                 <div class="container">
                     <div class="responsive-logo">
                         <div class="logo">
-                            <a itemprop="url" href="{% url 'index' %}" title=""><img itemprop="image" src="{% static 'web/images/resource/logo3.png' %}" alt="" /></a>
+                            <a itemprop="url" href="{% url 'index' %}" title=""><img itemprop="image" src="{% static 'web/images/resource/tpc-logo.png' %}" alt="" /></a>
                         </div>
                     </div>
                     <span class="responsive-btn"><i class="fa fa-list"></i></span>
@@ -127,16 +134,13 @@
                             </li>
                             <li><a itemprop="url" href="{% url 'service' %}" title="">SERVICES</a>
                             </li>
-                            <li><a itemprop="url" href="{% url 'gallery' %}" title="">GALLERY</a>
-                            </li>
-                            <li class="menu-item-has-children"><a itemprop="url" href="#" title="">PAGES</a>
+                            <li class="menu-item-has-children"><a itemprop="url" href="" title="">PAGES</a>
                                 <ul>
-                                    <li><a itemprop="url" href="makeus-different.html" title="">Make Us Different</a></li>
-                                    <li><a itemprop="url" href="404.html" title="">404</a></li>
-                                    <li><a itemprop="url" href="search-found.html" title="">Search Found</a></li>
-                                    <li><a itemprop="url" href="search-not-found.html" title="">Search not Found</a></li>
-                                    <li><a itemprop="url" href="about.html" title="">About</a></li>
+                                    <li><a itemprop="url" href="{% url 'booking' %}" title="">Online Booking</a></li>
+                                    <li><a itemprop="url" href="{% url 'volume' %}" title="">Volume Calculator</a></li>
                                 </ul>
+                            </li>
+                            <li><a itemprop="url" href="{% url 'gallery' %}" title="">GALLERY</a>
                             </li>
                             <li><a itemprop="url" href="{% url 'contact' %}" title="">CONTACT</a></li>
                         </ul>
@@ -352,60 +356,62 @@
                     <div class="col-md-12">
                         <div class="">
                             <div class="row">
+                                {% for item in office %}
                                 <div class="col-md-4">
                                     <div class="region-contact-info team-detail-info">
                                         <div class="heading2">
                                             <span>Fast And Safe</span>
-                                            <h3>Head Office</h3>
+                                            <h3>{{item.name}}</h3>
                                         </div>
-                                        <p> KA-74/1, Pragati Sarani, Kuril Chowrasta, Dhaka.</p>
+                                        <p> {{item.address}}</p>
                                         <div class="contact-detail">
                                             <span class="contact">
                                                 <i class="fa fa-mobile"></i>
                                                 <strong>Phone No</strong>
-                                                <span>+88-02-8411515</span>
-                                                <span>+88-02-8411515</span>
+                                                <span>{{item.phone}}</span>
+                                                <span></span>
                                             </span>
                                             <span class="contact">
                                                 <i class="fa fa-envelope"></i>
                                                 <strong>Email Address</strong>
-                                                <span>info@samiralliance.com</span>
+                                                <span>{{item.email}}</span>
                                             </span>
                                             <span class="contact">
                                                 <i class="fa fa-clock-o"></i>
                                                 <strong>Office Timing</strong>
-                                                <span>08:00am - 08:00pm / Friday-Thursday</span>
+                                                <span>{{item.time}} / {{item.date}}</span>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="region-contact-info team-detail-info">
-                                        <div class="heading2">
-                                            <span>Fast And Safe</span>
-                                            <h3>Rajshahi Office</h3>
-                                        </div>
-                                        <p>C-89, Shipai Para, P/o: GPO-6000, P/s: Rajpara, Rajshahi.</p>
-                                        <div class="contact-detail">
-                                            <span class="contact">
-                                                <i class="fa fa-mobile"></i>
-                                                <strong>Phone No</strong>
-                                                <span>+8801310-589125</span>
-                                                <span>+8801310-589125</span>
-                                            </span>
-                                            <span class="contact">
-                                                <i class="fa fa-envelope"></i>
-                                                <strong>Email Address</strong>
-                                                <span>shahnama.tpc@aol.com</span>
-                                            </span>
-                                            <span class="contact">
-                                                <i class="fa fa-clock-o"></i>
-                                                <strong>Office Timing</strong>
-                                                <span>08:00am - 08:00pm / Friday-Thursday</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
+<!--                                <div class="col-md-4">-->
+<!--                                    <div class="region-contact-info team-detail-info">-->
+<!--                                        <div class="heading2">-->
+<!--                                            <span>Fast And Safe</span>-->
+<!--                                            <h3>Rajshahi Office</h3>-->
+<!--                                        </div>-->
+<!--                                        <p>C-89, Shipai Para, P/o: GPO-6000, P/s: Rajpara, Rajshahi.</p>-->
+<!--                                        <div class="contact-detail">-->
+<!--                                            <span class="contact">-->
+<!--                                                <i class="fa fa-mobile"></i>-->
+<!--                                                <strong>Phone No</strong>-->
+<!--                                                <span>+8801310-589125</span>-->
+<!--                                                <span>+8801310-589125</span>-->
+<!--                                            </span>-->
+<!--                                            <span class="contact">-->
+<!--                                                <i class="fa fa-envelope"></i>-->
+<!--                                                <strong>Email Address</strong>-->
+<!--                                                <span>shahnama.tpc@aol.com</span>-->
+<!--                                            </span>-->
+<!--                                            <span class="contact">-->
+<!--                                                <i class="fa fa-clock-o"></i>-->
+<!--                                                <strong>Office Timing</strong>-->
+<!--                                                <span>08:00am - 08:00pm / Friday-Thursday</span>-->
+<!--                                            </span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 <div class="col-md-8">
                                     <div class="get-quote-form contact-info-form">
                                         <div class="heading2">
@@ -492,7 +498,7 @@
                                     <div class="widget">
                                         <div class="about-widget">
                                             <div class="logo">
-                                                <a itemprop="url" href="{% url 'index' %}" title=""><img itemprop="image" src="{% static 'web/images/resource/logo3.png' %}" alt="" /></a>
+                                                <a itemprop="url" href="{% url 'index' %}" title=""><img itemprop="image" src="{% static 'web/images/resource/tpc-logo.png' %}" alt="" /></a>
                                             </div>
                                             <p itemprop="description">The Professional Courier provides domestic & international courier service. The Professional Courier is one of the largest air freight transportation providers in the world.</p>
                                             <ul class="social-btn">
