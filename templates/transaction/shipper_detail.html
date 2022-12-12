@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<style>
+    td,
+th {
+    border:  1px solid rgb(190, 190, 190);
+    padding: 10px;
+}
+
+td {
+    text-align: left;
+    padding-left: 20px;
+}
+
+tr:nth-child(even) {
+    background-color: #eee;
+}
+
+th[scope="col"] {
+    background-color: #696969;
+    color: #fff;
+    width: 30%;
+}
+
+td[scope="row"] {
+    background-color: #d7d9f2;
+}
+
+caption {
+    padding: 10px;
+    caption-side: top;
+}
+
+table {
+    border-collapse: collapse;
+    border: None;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    font-size: .8rem;
+    width: 80%;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<div class="container p-4">
+    <div class="row">
+        <div class="col-lg-12 col-12 layout-spacing">
+            <div class="statbox widget box box-shadow">
+                <div class="widget-header">
+                    <div class="row">
+
+                        <div class="mb-3 col-md-1">
+                            <a href="{% url 'all-shippers' %}">
+                                <button class="btn btn-outline-danger" type="submit"><i class="fa fa-arrow-left"
+                                                                                      aria-hidden="true"></i></button>
+                            </a>
+                        </div>
+
+                        <div class="mb-3 col-md-11">
+                            <center>
+                                <h5>{{title}}</h5>
+                            </center>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="widget-content widget-content-area">
+
+                    <table class="center">
+                        <caption>Shipper Full Details</caption>
+                        <tr>
+                            <th scope="col">Shipper Company</th>
+                            <td scope="row">{{ ship.shipper_company }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Shipper Address</th>
+                            <td scope="row">{{ ship.shipper_address }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">City</th>
+                            <td scope="row">{{ ship.city }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">State</th>
+                            <td scope="row">{{ ship.state }}</td>
+                        </tr>
+                         <tr>
+                            <th scope="col">Zip Code</th>
+                            <td scope="row">{{ ship.zip }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Shipper Name</th>
+                            <td scope="row">{{ ship.shipper_name }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Telephone</th>
+                            <td scope="row">{{ ship.telephone }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Mobile</th>
+                            <td scope="row">{{ ship.mobile }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Nid / Passport</th>
+                            <td scope="row">{{ ship.nid }}</td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
