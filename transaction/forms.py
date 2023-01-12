@@ -1,11 +1,12 @@
 from django import forms
 from .models import *
 
+
 class ShipperCreateForm(forms.ModelForm):
     class Meta:
         model = Sender
         fields = (
-            'shipper_code', 'shipper_company', 'shipper_address', 'city', 'state', 'zip', 'shipper_name', 'mobile', 'telephone',)
+            'shipper_code', 'shipper_company', 'shipper_address', 'city', 'state', 'zip', 'shipper_name', 'mobile', 'telephone', 'nid',)
         
         widgets = {
             'shipper_code': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
@@ -17,7 +18,27 @@ class ShipperCreateForm(forms.ModelForm):
             'shipper_name': forms.TextInput(attrs={'class': 'form-control'}),
             'mobile': forms.TextInput(attrs={'class': 'form-control'}),
             'telephone': forms.TextInput(attrs={'class': 'form-control'}),
+            'nid': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
+
+class ShipperUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Sender
+        fields = (
+            'shipper_company', 'shipper_address', 'city', 'state', 'zip', 'shipper_name', 'mobile',
+            'telephone', 'nid',)
+
+        widgets = {
+            'shipper_company': forms.TextInput(attrs={'class': 'form-control'}),
+            'shipper_address': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'state': forms.TextInput(attrs={'class': 'form-control'}),
+            'zip': forms.TextInput(attrs={'class': 'form-control'}),
+            'shipper_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'mobile': forms.TextInput(attrs={'class': 'form-control'}),
+            'telephone': forms.TextInput(attrs={'class': 'form-control'}),
+            'nid': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
 
@@ -25,7 +46,7 @@ class ReceiverCreateForm(forms.ModelForm):
     class Meta:
         model = Receiver
         fields = (
-            'receiver_code', 'receiver_company', 'receiver_address', 'city', 'state', 'zip', 'receiver_name', 'mobile', 'telephone',)
+            'receiver_code', 'receiver_company', 'receiver_address', 'city', 'state', 'zip', 'receiver_name', 'mobile', 'telephone', 'nid',)
         
         widgets = {
             'receiver_code': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
@@ -37,7 +58,28 @@ class ReceiverCreateForm(forms.ModelForm):
             'receiver_name': forms.TextInput(attrs={'class': 'form-control'}),
             'mobile': forms.TextInput(attrs={'class': 'form-control'}),
             'telephone': forms.TextInput(attrs={'class': 'form-control'}),
+            'nid': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
+
+class ReceiverUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Receiver
+        fields = (
+            'receiver_company', 'receiver_address', 'city', 'state', 'zip', 'receiver_name', 'mobile',
+            'telephone', 'nid',)
+
+        widgets = {
+            'receiver_code': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
+            'receiver_company': forms.TextInput(attrs={'class': 'form-control'}),
+            'receiver_address': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'state': forms.TextInput(attrs={'class': 'form-control'}),
+            'zip': forms.TextInput(attrs={'class': 'form-control'}),
+            'receiver_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'mobile': forms.TextInput(attrs={'class': 'form-control'}),
+            'telephone': forms.TextInput(attrs={'class': 'form-control'}),
+            'nid': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
 
@@ -48,7 +90,7 @@ class ShipmentCreateForm(forms.ModelForm):
             'shipment_date', 'shipper_account', 'shipper', 'shipper_address', 'shipper_city', 'shipper_state', 'shipper_zip', 'shipper_name', 'shipper_mobile', 'shipper_telephone',
             'origin_country', 'destination_country', 'receiver', 'receiver_address', 'receiver_city', 'receiver_state', 'receiver_zip', 'receiver_name', 'receiver_mobile', 'receiver_telephone',
             'ref_no', 'courier', 'awb_no', 'piece', 'weight', 'content', 'remark', 'height', 'width', 'length', 'pickup_by', 'pickup_date', 'currency', 'prepaid_amount', 'collect_amount',
-            'third_party_amount', 'cheque_no', 'account_no',
+            'third_party_amount', 'cheque_no', 'account_no', 'shipper_nid', 'receiver_nid',
             )
         widgets = {
             'shipment_date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'date',}),
@@ -63,6 +105,7 @@ class ShipmentCreateForm(forms.ModelForm):
             'shipper_name': forms.TextInput(attrs={'class': 'form-control'}),
             'shipper_mobile': forms.TextInput(attrs={'class': 'form-control'}),
             'shipper_telephone': forms.TextInput(attrs={'class': 'form-control'}),
+            'shipper_nid': forms.TextInput(attrs={'class': 'form-control'}),
             'receiver': forms.Select(
                 attrs={'required': True, 'class': 'form-control', 'value': '', 'id': 'id_receiver'}),
             
@@ -73,6 +116,7 @@ class ShipmentCreateForm(forms.ModelForm):
             'receiver_name': forms.TextInput(attrs={'class': 'form-control'}),
             'receiver_mobile': forms.TextInput(attrs={'class': 'form-control'}),
             'receiver_telephone': forms.TextInput(attrs={'class': 'form-control'}),
+            'receiver_nid': forms.TextInput(attrs={'class': 'form-control'}),
             'origin_country': forms.Select(
                 attrs={'required': True, 'class': 'form-control'}
             ),
@@ -117,7 +161,7 @@ class ShipmentUpdateForm(forms.ModelForm):
             'receiver_zip', 'receiver_name', 'receiver_mobile', 'receiver_telephone',
             'ref_no', 'courier', 'awb_no', 'piece', 'weight', 'content', 'remark', 'height', 'width', 'length',
             'pickup_by', 'pickup_date', 'currency', 'prepaid_amount', 'collect_amount',
-            'third_party_amount', 'cheque_no', 'account_no',
+            'third_party_amount', 'cheque_no', 'account_no', 'shipper_nid', 'receiver_nid',
         )
         widgets = {
             'status': forms.Select(attrs={'class': 'form-control', }),
@@ -132,6 +176,7 @@ class ShipmentUpdateForm(forms.ModelForm):
             'shipper_name': forms.TextInput(attrs={'class': 'form-control'}),
             'shipper_mobile': forms.TextInput(attrs={'class': 'form-control'}),
             'shipper_telephone': forms.TextInput(attrs={'class': 'form-control'}),
+            'shipper_nid': forms.TextInput(attrs={'class': 'form-control'}),
             'receiver': forms.Select(
                 attrs={'required': True, 'class': 'form-control', 'value': '', 'id': 'id_receiver'}),
 
@@ -142,6 +187,7 @@ class ShipmentUpdateForm(forms.ModelForm):
             'receiver_name': forms.TextInput(attrs={'class': 'form-control'}),
             'receiver_mobile': forms.TextInput(attrs={'class': 'form-control'}),
             'receiver_telephone': forms.TextInput(attrs={'class': 'form-control'}),
+            'receiver_nid': forms.TextInput(attrs={'class': 'form-control'}),
             'origin_country': forms.Select(
                 attrs={'required': True, 'class': 'form-control'}
             ),
