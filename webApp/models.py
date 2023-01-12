@@ -54,3 +54,14 @@ class Booking(models.Model):
     def __str__(self):
         return self.sender_attention
 
+
+class Office(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=500, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    email = models.CharField(max_length=100, blank=True, null=True)
+    time = models.CharField(max_length=100, blank=True, null=True)
+    date = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
