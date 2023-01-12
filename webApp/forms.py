@@ -51,3 +51,19 @@ class BookingCreateForm(forms.ModelForm):
             'sender_nid': forms.TextInput(attrs={'class': 'form-control'}),
             'receiver_nid': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+
+class OfficeCreateForm(forms.ModelForm):
+    class Meta:
+        model = Office
+        fields = (
+            'name', 'address', 'phone', 'email', 'time', 'date',
+        )
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.TextInput(attrs={'class': 'form-control'}),
+            'time': forms.TextInput(attrs={'class': 'form-control'}),
+            'date': forms.TextInput(attrs={'class': 'form-control'}),
+        }
