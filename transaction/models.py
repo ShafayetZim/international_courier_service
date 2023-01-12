@@ -32,6 +32,7 @@ class Sender(models.Model):
     shipper_name = models.CharField(max_length=100, blank=True, null=True)
     mobile = models.CharField(max_length=50, blank=True, null=True)
     telephone = models.CharField(max_length=100, blank=True, null=True)
+    nid = models.CharField(max_length=50, blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING, )
     is_active = models.BooleanField(default=True)
 
@@ -61,6 +62,7 @@ class Receiver(models.Model):
     receiver_name = models.CharField(max_length=100, blank=True, null=True)
     mobile = models.CharField(max_length=50, blank=True, null=True)
     telephone = models.CharField(max_length=100, blank=True, null=True)
+    nid = models.CharField(max_length=50, blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING, )
     is_active = models.BooleanField(default=True)
 
@@ -106,6 +108,7 @@ class Transaction(models.Model):
     shipper_name = models.CharField(max_length=200, blank=True, null=True)
     shipper_mobile = models.CharField(max_length=20, blank=True, null=True)
     shipper_telephone = models.CharField(max_length=20, blank=True, null=True)
+    shipper_nid = models.CharField(max_length=50, blank=True, null=True)
     origin_country = models.ForeignKey(Origin, on_delete=models.DO_NOTHING, )
     receiver = models.ForeignKey(Receiver, on_delete=models.DO_NOTHING, )
     receiver_address = models.CharField(max_length=200,)
@@ -115,6 +118,7 @@ class Transaction(models.Model):
     receiver_name = models.CharField(max_length=200, blank=True, null=True)
     receiver_mobile = models.CharField(max_length=20, blank=True, null=True)
     receiver_telephone = models.CharField(max_length=20, blank=True, null=True)
+    receiver_nid = models.CharField(max_length=50, blank=True, null=True)
     destination_country = models.ForeignKey(Destination, on_delete=models.DO_NOTHING, )
     ref_no = models.CharField(max_length=200, blank=True, null=True)
     courier = models.ForeignKey(Courier, on_delete=models.DO_NOTHING, )
