@@ -15,9 +15,10 @@ from django.views.generic import (
 
 # Create your views here.
 
+
 class AllCourierListView(ListView):
     model = Courier  # Model I want to Covert to List
-    template_name = 'courier.html'  # Template Name
+    template_name = 'dataset/courier.html'  # Template Name
     context_object_name = 'courier'  # Change default name of objectList
     ordering = ['-id']  # Ordering post LIFO
     paginate_by = 20  # number of page I want to show in single page
@@ -32,7 +33,7 @@ class AllCourierListView(ListView):
 
 def add_new_couriers(request):
     print("called")
-    template_name = 'add_new_courier.html'
+    template_name = 'dataset/add_new_courier.html'
 
     if request.method == 'GET':
         print("called GET")
@@ -66,7 +67,7 @@ class CourierUpdateView(SuccessMessageMixin, UpdateView):
     model = Courier
     form_class = CourierCreateForm
     success_url = reverse_lazy('all-couriers')
-    template_name = 'update_courier.html'
+    template_name = 'dataset/update_courier.html'
     success_message = "Courier was updated successfully"
 
     def get_context_data(self, **kwargs):
@@ -87,7 +88,7 @@ def courier_delete(request, id):
 
 class AllOriginListView(ListView):
     model = Origin  # Model I want to Covert to List
-    template_name = 'origin.html'  # Template Name
+    template_name = 'dataset/origin.html'  # Template Name
     context_object_name = 'origin'  # Change default name of objectList
     ordering = ['-id']  # Ordering post LIFO
     paginate_by = 20  # number of page I want to show in single page
@@ -102,7 +103,7 @@ class AllOriginListView(ListView):
 
 def add_new_origin(request):
     print("called")
-    template_name = 'add_origin.html'
+    template_name = 'dataset/add_origin.html'
 
     if request.method == 'GET':
         print("called GET")
@@ -136,7 +137,7 @@ class OriginUpdateView(SuccessMessageMixin, UpdateView):
     model = Origin
     form_class = OriginCreateForm
     success_url = reverse_lazy('all-origins')
-    template_name = 'update_origin.html'
+    template_name = 'dataset/update_origin.html'
     success_message = "Origin Country was updated successfully"
 
     def get_context_data(self, **kwargs):
@@ -157,7 +158,7 @@ def origin_delete(request, id):
 
 class AllDestinationListView(ListView):
     model = Destination  # Model I want to Covert to List
-    template_name = 'destination.html'  # Template Name
+    template_name = 'dataset/destination.html'  # Template Name
     context_object_name = 'destination'  # Change default name of objectList
     ordering = ['-id']  # Ordering post LIFO
     paginate_by = 20  # number of page I want to show in single page
@@ -172,7 +173,7 @@ class AllDestinationListView(ListView):
 
 def add_new_destination(request):
     print("called")
-    template_name = 'add_destination.html'
+    template_name = 'dataset/add_destination.html'
 
     if request.method == 'GET':
         print("called GET")
@@ -206,7 +207,7 @@ class DestinationUpdateView(SuccessMessageMixin, UpdateView):
     model = Destination
     form_class = DestinationCreateForm
     success_url = reverse_lazy('all-destinations')
-    template_name = 'update_destination.html'
+    template_name = 'dataset/update_destination.html'
     success_message = "Destination Country was updated successfully"
 
     def get_context_data(self, **kwargs):
@@ -215,6 +216,17 @@ class DestinationUpdateView(SuccessMessageMixin, UpdateView):
         context["nav_bar"] = "destination_list"
         return context
 
+
+def destination_delete(request, id):
+    if request.method == 'GET':
+        instance = Destination.objects.get(id=id)
+        Destination.objects.filter(id=instance.id).delete()
+        instance.delete()
+        messages.add_message(request, messages.WARNING, 'Delete Success')
+        return redirect('all-destinations')
+
+
+# extra
 class AllExtraListView(ListView):
     model = Shipper  # Model I want to Covert to List
     template_name = 'extra.html'  # Template Name
@@ -229,14 +241,6 @@ class AllExtraListView(ListView):
         context['shipper'] = self.model.objects.all().order_by('-id')
         return context
 
-
-def destination_delete(request, id):
-    if request.method == 'GET':
-        instance = Destination.objects.get(id=id)
-        Destination.objects.filter(id=instance.id).delete()
-        instance.delete()
-        messages.add_message(request, messages.WARNING, 'Delete Success')
-        return redirect('all-destinations')
 
 def sales_delete(request, id):
     if request.method == 'GET':
