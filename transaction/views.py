@@ -15,7 +15,7 @@ from django.urls import reverse
 
 class AllShipperListView(ListView):
     model = Sender  # Model I want to Covert to List
-    template_name = 'shipper.html'  # Template Name
+    template_name = 'transaction/shipper.html'  # Template Name
     context_object_name = 'shipper'  # Change default name of objectList
     ordering = ['-shipper_code']  # Ordering post LIFO
     paginate_by = 20  # number of page I want to show in single page
@@ -30,7 +30,7 @@ class AllShipperListView(ListView):
 
 def new_shipper(request):
     print("called")
-    template_name = 'new_shipper.html'
+    template_name = 'transaction/new_shipper.html'
 
     if request.method == 'GET':
         print("called GET")
@@ -62,9 +62,9 @@ def new_shipper(request):
 
 class ShipperUpdateView(SuccessMessageMixin, UpdateView):
     model = Sender
-    form_class = ShipperCreateForm
+    form_class = ShipperUpdateForm
     success_url = reverse_lazy('all-shippers')
-    template_name = 'update_shipper.html'
+    template_name = 'transaction/update_shipper.html'
     success_message = "Shipper was updated successfully"
 
     def get_context_data(self, **kwargs):
@@ -85,7 +85,7 @@ def shipper_delete(request, shipper_code):
 
 class ShipperDetailView(DetailView):
     model = Sender
-    template_name = 'shipper_detail.html'
+    template_name = 'transaction/shipper_detail.html'
     context_object_name = 'ship'
 
     def get_context_data(self, **kwargs):
@@ -97,7 +97,7 @@ class ShipperDetailView(DetailView):
 
 class AllReceiverListView(ListView):
     model = Receiver  # Model I want to Covert to List
-    template_name = 'receiver.html'  # Template Name
+    template_name = 'transaction/receiver.html'  # Template Name
     context_object_name = 'receiver'  # Change default name of objectList
     ordering = ['-receiver_code']  # Ordering post LIFO
     paginate_by = 20  # number of page I want to show in single page
@@ -112,7 +112,7 @@ class AllReceiverListView(ListView):
 
 def new_receiver(request):
     print("called")
-    template_name = 'new_receiver.html'
+    template_name = 'transaction/new_receiver.html'
 
     if request.method == 'GET':
         print("called GET")
@@ -144,9 +144,9 @@ def new_receiver(request):
 
 class ReceiverUpdateView(SuccessMessageMixin, UpdateView):
     model = Receiver
-    form_class = ReceiverCreateForm
+    form_class = ReceiverUpdateForm
     success_url = reverse_lazy('all-receivers')
-    template_name = 'update_receiver.html'
+    template_name = 'transaction/update_receiver.html'
     success_message = "Receiver was updated successfully"
 
     def get_context_data(self, **kwargs):
@@ -158,7 +158,7 @@ class ReceiverUpdateView(SuccessMessageMixin, UpdateView):
 
 class ReceiverDetailView(DetailView):
     model = Receiver
-    template_name = 'receiver_detail.html'
+    template_name = 'transaction/receiver_detail.html'
     context_object_name = 'receive'
 
     def get_context_data(self, **kwargs):
@@ -179,7 +179,7 @@ def receiver_delete(request, receiver_code):
 
 class AllShipmentListView(ListView):
     model = Transaction  # Model I want to Convert to List
-    template_name = 'shipment.html'  # Template Name
+    template_name = 'transaction/shipment.html'  # Template Name
     context_object_name = 'shipment'  # Change default name of objectList
     ordering = ['-shipment_no']  # Ordering post LIFO
     paginate_by = 20  # number of page I want to show in single page
@@ -188,12 +188,12 @@ class AllShipmentListView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Shipment List"
         context["nav_bar"] = "shipment_list"
-        context['shipment'] = self.model.objects.all().order_by('-shipment_no')
+        context['shipment'] = self.model.objects.all().order_by('-shipment_date','-shipment_no')
         return context
 
 
 def new_shipment(request):
-    template_name = 'add_shipment.html'
+    template_name = 'transaction/add_shipment.html'
 
     if request.method == 'GET':
         print("GET called")
@@ -231,7 +231,7 @@ def new_shipment(request):
 
 
 def shipment_edit(request, shipment_no):
-    template_name = 'update_shipment.html'
+    template_name = 'transaction/update_shipment.html'
 
     if request.method == 'GET':
         print("GET called")
@@ -267,7 +267,7 @@ class ShippingStatus(SuccessMessageMixin, UpdateView):
     model = Transaction
     form_class = ShippingStatusForm
     success_url = reverse_lazy('all-shipments')
-    template_name = 'shipping_status.html'
+    template_name = 'transaction/shipping_status.html'
     success_message = "Shipping was updated successfully"
 
     def get_context_data(self, **kwargs):
@@ -281,7 +281,7 @@ class ShipmentUpdateView(SuccessMessageMixin, UpdateView):
     model = Transaction
     form_class = ShipmentUpdateForm
     success_url = reverse_lazy('all-shipments')
-    template_name = 'update_shipment.html'
+    template_name = 'transaction/update_shipment.html'
     success_message = "Shipment was updated successfully"
 
     def get_context_data(self, **kwargs):
@@ -293,7 +293,7 @@ class ShipmentUpdateView(SuccessMessageMixin, UpdateView):
 
 class ShipmentDetailView(DetailView):
     model = Transaction
-    template_name = 'shipment_detail.html'
+    template_name = 'transaction/shipment_detail.html'
     context_object_name = 'shipment'
 
     def get_context_data(self, **kwargs):
@@ -336,6 +336,7 @@ def shipper_info(request):
         'zip': shipper.zip,
         'telephone': shipper.telephone,
         'name': shipper.shipper_name,
+        'nid': shipper.nid,
     }
     print(data)
     return JsonResponse(data, status=200)
@@ -353,6 +354,7 @@ def receiver_info(request):
         'zipcode': receiver.zip,
         'tphone': receiver.telephone,
         'recipient': receiver.receiver_name,
+        'passport': receiver.nid,
     }
     print(data)
     return JsonResponse(data, status=200)
@@ -369,7 +371,7 @@ def print_invoice(request, shipment_no):
         'nav_bar': "shipment_list",
         'shipment': shipment,
     }
-    pdf = render_to_pdf('invoice.html', context)
+    pdf = render_to_pdf('transaction/invoice.html', context)
     return HttpResponse(pdf, content_type='application/pdf')
 
 
@@ -384,7 +386,7 @@ def airway_bill(request, shipment_no):
         'nav_bar': "shipment_list",
         'shipment': shipment,
     }
-    pdf = render_to_pdf('airway_bill.html', context)
+    pdf = render_to_pdf('transaction/airway_bill.html', context)
     return HttpResponse(pdf, content_type='application/pdf')
 
 
@@ -399,5 +401,5 @@ def money_receipt(request, shipment_no):
         'nav_bar': "shipment_list",
         'shipment': shipment,
     }
-    pdf = render_to_pdf('money_receipt.html', context)
+    pdf = render_to_pdf('transaction/money_receipt.html', context)
     return HttpResponse(pdf, content_type='application/pdf')
