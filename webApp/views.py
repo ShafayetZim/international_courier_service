@@ -4,7 +4,9 @@ from django.views import View
 from .forms import *
 from .models import *
 from django.urls import reverse
+from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 
@@ -52,7 +54,8 @@ class ContactView(View):
     def get(self, request):
         context = {
             'title': "Contact",
-            'pageview': "Contact"
+            'pageview': "Contact",
+            'office': Office.objects.all(),
         }
         return render(request, 'web/contact.html', context)
 
@@ -132,3 +135,73 @@ class BookingDetailView(DetailView):
         context["title"] = "Booking Information"
         context["nav_bar"] = "booking_list"
         return context
+
+
+class OfficeView(ListView):
+    model = Office
+    template_name = 'web/office_list.html'
+    context_object_name = 'office'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Office List"
+        context["nav_bar"] = "office_list"
+        context['office'] = self.model.objects.all().order_by('-id')
+        return context
+
+
+def new_office(request):
+    template_name = 'web/new_office.html'
+
+    if request.method == 'GET':
+        print("GET called")
+        office_form = OfficeCreateForm(None)
+
+    elif request.method == 'POST':
+        print("Post called")
+        office_form = OfficeCreateForm(request.POST)
+
+        if office_form.is_valid():
+            office = office_form.save(commit=False)
+            office.author = request.user
+            office.is_active = True
+            office.save()
+
+            messages.add_message(request, messages.SUCCESS, 'New Office Entry Successful')
+            return redirect('office-list')
+
+            # def get_absolute_url(self):
+            #     return reverse('shipment-edit', kwargs={'pk': self.pk})
+
+        else:
+            print("Not Valid Create Form")
+            print(office_form.errors)
+
+    return render(request, template_name, {
+        'office_form': office_form,
+        'title': 'Office',
+        'nav_bar': 'new_office',
+    })
+
+
+class OfficeUpdateView(SuccessMessageMixin, UpdateView):
+    model = Office
+    form_class = OfficeCreateForm
+    success_url = reverse_lazy('office-list')
+    template_name = 'web/update_office.html'
+    success_message = "Office was updated successfully"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Update Office Information"
+        context["nav_bar"] = "office_list"
+        return context
+
+
+def office_delete(request, id):
+    if request.method == 'GET':
+        instance = Office.objects.get(id=id)
+        Office.objects.filter(id=instance.id).delete()
+        instance.delete()
+        messages.add_message(request, messages.WARNING, 'Delete Success')
+        return redirect('office-list')
