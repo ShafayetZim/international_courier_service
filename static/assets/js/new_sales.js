@@ -73,6 +73,7 @@ $(document).ready(function () {
                 $("#id_shipper_name").val(data.name);
                 $("#id_shipper_mobile").val(data.mobile);
                 $("#id_shipper_telephone").val(data.telephone);
+                $("#id_shipper_nid").val(data.nid);
 
             }
         });
@@ -98,6 +99,7 @@ $(document).ready(function () {
                 $("#id_receiver_name").val(data.recipient);
                 $("#id_receiver_mobile").val(data.phone);
                 $("#id_receiver_telephone").val(data.tphone);
+                $("#id_receiver_nid").val(data.passport);
 
             }
         });
