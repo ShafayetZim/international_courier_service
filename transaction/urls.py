@@ -29,4 +29,5 @@ urlpatterns = [
     path('money-receipt/<str:shipment_no>', views.money_receipt, name='money-receipt'),
     path('details/<str:pk>', views.DetailView.as_view(), name='details'),
     # path('post/', TransactionFormPreview(ShipmentCreateForm)),
+    # path('update-test/<str:pk>', views.TestUpdateView.as_view(), name='update_test'),
 ]
