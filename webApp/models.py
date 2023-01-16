@@ -65,3 +65,68 @@ class Office(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Service(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='service')
+    icon = models.ImageField(upload_to='service')
+
+    def __str__(self):
+        return self.name
+
+
+class Gallery(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='gallery')
+
+    def __str__(self):
+        return self.name
+
+
+class Partner(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='partner')
+
+    def __str__(self):
+        return self.name
+
+
+class Review(models.Model):
+    name = models.CharField(max_length=100)
+    review = models.CharField(max_length=500)
+    image = models.ImageField(upload_to='partner')
+
+    def __str__(self):
+        return self.name
+
+
+class About(models.Model):
+    title = models.CharField(max_length=100)
+    detail = models.CharField(max_length=500)
+    image = models.ImageField(upload_to='bg')
+
+    def __str__(self):
+        return self.title
+
+
+class Facility(models.Model):
+    title = models.CharField(max_length=100)
+    detail = models.CharField(max_length=500)
+    image = models.ImageField(upload_to='facility')
+    icon = models.ImageField(upload_to='facility')
+
+    def __str__(self):
+        return self.title
+
+
+class Benefit(models.Model):
+    title = models.CharField(max_length=100)
+    detail = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.title
+
+
+
+
