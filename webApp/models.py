@@ -70,7 +70,7 @@ class Office(models.Model):
 class Service(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='service')
-    icon = models.ImageField(upload_to='service')
+    icon = models.ImageField(upload_to='service', blank=True)
 
     def __str__(self):
         return self.name
@@ -86,7 +86,7 @@ class Gallery(models.Model):
 
 class Partner(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='partner')
+    image = models.ImageField(upload_to='client')
 
     def __str__(self):
         return self.name
@@ -95,7 +95,7 @@ class Partner(models.Model):
 class Review(models.Model):
     name = models.CharField(max_length=100)
     review = models.CharField(max_length=500)
-    image = models.ImageField(upload_to='partner')
+    image = models.ImageField(upload_to='client')
 
     def __str__(self):
         return self.name
@@ -114,7 +114,7 @@ class Facility(models.Model):
     title = models.CharField(max_length=100)
     detail = models.CharField(max_length=500)
     image = models.ImageField(upload_to='facility')
-    icon = models.ImageField(upload_to='facility')
+    icon = models.ImageField(upload_to='facility', blank=True)
 
     def __str__(self):
         return self.title
