@@ -67,3 +67,92 @@ class OfficeCreateForm(forms.ModelForm):
             'time': forms.TextInput(attrs={'class': 'form-control'}),
             'date': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+
+class ServiceCreateForm(forms.ModelForm):
+    class Meta:
+        model = Service
+        fields = (
+            'name', 'image', 'icon',
+        )
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'rounded_list'}),
+            'icon': forms.FileInput(attrs={'class': 'rounded_list'}),
+        }
+
+
+class GalleryCreateForm(forms.ModelForm):
+    class Meta:
+        model = Gallery
+        fields = (
+            'name', 'image',
+        )
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'rounded_list'}),
+        }
+
+
+class PartnerCreateForm(forms.ModelForm):
+    class Meta:
+        model = Partner
+        fields = (
+            'name', 'image',
+        )
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'rounded_list'}),
+        }
+
+
+class ReviewCreateForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = (
+            'name', 'review', 'image',
+        )
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'review': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'rounded_list'}),
+        }
+
+
+class AboutCreateForm(forms.ModelForm):
+    class Meta:
+        model = About
+        fields = (
+            'title', 'detail', 'image',
+        )
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'detail': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'rounded_list'}),
+        }
+
+
+class FacilityCreateForm(forms.ModelForm):
+    class Meta:
+        model = Facility
+        fields = (
+            'title', 'detail', 'image', 'icon',
+        )
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'detail': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'rounded_list'}),
+            'icon': forms.FileInput(attrs={'class': 'rounded_list'}),
+        }
+
+
+class BenefitCreateForm(forms.ModelForm):
+    class Meta:
+        model = Benefit
+        fields = (
+            'title', 'detail',
+        )
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'detail': forms.TextInput(attrs={'class': 'form-control'}),
+        }
