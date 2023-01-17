@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.HomeView.as_view(), name="index"),
@@ -16,4 +18,17 @@ urlpatterns = [
     path('office_list', views.OfficeView.as_view(), name="office-list"),
     path('office_update/<str:pk>', views.OfficeUpdateView.as_view(), name='update-office'),
     path('office_delete/<int:id>', views.office_delete, name="office-delete"),
-]
+
+    path('service_list', views.ServiceList.as_view(), name="service-list"),
+    path('new_service', views.new_service, name="new-service"),
+    path('gallery_list', views.GalleryList.as_view(), name="gallery-list"),
+    path('new_gallery', views.new_gallery, name="new-gallery"),
+    path('partner_list', views.PartnerList.as_view(), name="partner-list"),
+    path('new_partner', views.new_partner, name="new-partner"),
+    path('review_list', views.ReviewList.as_view(), name="review-list"),
+    path('new_review', views.new_review, name="new-review"),
+    path('facility_list', views.FacilityList.as_view(), name="facility-list"),
+    path('new_facility', views.new_facility, name="new-facility"),
+    path('benefit_list', views.BenefitList.as_view(), name="benefit-list"),
+    path('new_benefit', views.new_benefit, name="new-benefit"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
