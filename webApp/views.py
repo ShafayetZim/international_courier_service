@@ -215,7 +215,7 @@ class ServiceList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Service List"
-        context["nav_bar"] = "service_list"
+        context["nav_bar"] = "service"
         context['service'] = self.model.objects.all().order_by('-id')
         return context
 
@@ -229,7 +229,7 @@ def new_service(request):
 
     elif request.method == 'POST':
         print("Post called")
-        service_form = ServiceCreateForm(request.POST)
+        service_form = ServiceCreateForm(request.POST, request.FILES)
 
         if service_form.is_valid():
             booking = service_form.save(commit=False)
@@ -245,8 +245,31 @@ def new_service(request):
     return render(request, template_name, {
         'service_form': service_form,
         'title': 'New Service',
-        'nav_bar': 'new_service',
+        'nav_bar': 'service',
     })
+
+
+class ServiceUpdateView(SuccessMessageMixin, UpdateView):
+    model = Service
+    form_class = ServiceCreateForm
+    success_url = reverse_lazy('service-list')
+    template_name = 'web_data/update_service.html'
+    success_message = "Service was updated successfully"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Update Service Information"
+        context["nav_bar"] = "service"
+        return context
+
+
+def service_delete(request, id):
+    if request.method == 'GET':
+        instance = Service.objects.get(id=id)
+        Service.objects.filter(id=instance.id).delete()
+        instance.delete()
+        messages.add_message(request, messages.WARNING, 'Delete Success')
+        return redirect('service-list')
 
 
 class GalleryList(ListView):
@@ -256,9 +279,9 @@ class GalleryList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "Office List"
-        context["nav_bar"] = "office_list"
-        context['office'] = self.model.objects.all().order_by('-id')
+        context["title"] = "Gallery List"
+        context["nav_bar"] = "gallery"
+        context['gallery'] = self.model.objects.all().order_by('-id')
         return context
 
 
@@ -271,7 +294,7 @@ def new_gallery(request):
 
     elif request.method == 'POST':
         print("Post called")
-        gallery_form = GalleryCreateForm(request.POST)
+        gallery_form = GalleryCreateForm(request.POST, request.FILES)
 
         if gallery_form.is_valid():
             gallery = gallery_form.save(commit=False)
@@ -287,8 +310,17 @@ def new_gallery(request):
     return render(request, template_name, {
         'gallery_form': gallery_form,
         'title': 'New Gallery',
-        'nav_bar': 'new_gallery',
+        'nav_bar': 'gallery',
     })
+
+
+def gallery_delete(request, id):
+    if request.method == 'GET':
+        instance = Gallery.objects.get(id=id)
+        Gallery.objects.filter(id=instance.id).delete()
+        instance.delete()
+        messages.add_message(request, messages.WARNING, 'Delete Success')
+        return redirect('gallery-list')
 
 
 class PartnerList(ListView):
@@ -299,7 +331,7 @@ class PartnerList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Partner List"
-        context["nav_bar"] = "partner_list"
+        context["nav_bar"] = "partner"
         context['partner'] = self.model.objects.all().order_by('-id')
         return context
 
@@ -313,7 +345,7 @@ def new_partner(request):
 
     elif request.method == 'POST':
         print("Post called")
-        partner_form = PartnerCreateForm(request.POST)
+        partner_form = PartnerCreateForm(request.POST, request.FILES)
 
         if partner_form.is_valid():
             partner = partner_form.save(commit=False)
@@ -329,8 +361,17 @@ def new_partner(request):
     return render(request, template_name, {
         'partner_form': partner_form,
         'title': 'New Partner',
-        'nav_bar': 'new_partner',
+        'nav_bar': 'partner',
     })
+
+
+def partner_delete(request, id):
+    if request.method == 'GET':
+        instance = Partner.objects.get(id=id)
+        Partner.objects.filter(id=instance.id).delete()
+        instance.delete()
+        messages.add_message(request, messages.WARNING, 'Delete Success')
+        return redirect('partner-list')
 
 
 class ReviewList(ListView):
@@ -341,7 +382,7 @@ class ReviewList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Review List"
-        context["nav_bar"] = "Review_list"
+        context["nav_bar"] = "review"
         context['review'] = self.model.objects.all().order_by('-id')
         return context
 
@@ -371,19 +412,44 @@ def new_review(request):
     return render(request, template_name, {
         'review_form': review_form,
         'title': 'New Review',
-        'nav_bar': 'new_review',
+        'nav_bar': 'review',
     })
+
+
+class ReviewUpdateView(UpdateView):
+    model = Review
+    form_class = ReviewCreateForm
+    success_url = reverse_lazy('review-list')
+    template_name = 'web_data/update_review.html'
+
+    success_message = "Review was updated successfully"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context)
+        context["title"] = "Update Review"
+        context["nav_bar"] = "review"
+        return context
+
+
+def review_delete(request, id):
+    if request.method == 'GET':
+        instance = Review.objects.get(id=id)
+        Review.objects.filter(id=instance.id).delete()
+        instance.delete()
+        messages.add_message(request, messages.WARNING, 'Delete Success')
+        return redirect('review-list')
 
 
 class FacilityList(ListView):
     model = Facility
     template_name = 'web_data/facility_list.html'
-    context_object_name = 'office'
+    context_object_name = 'facility'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Facility List"
-        context["nav_bar"] = "facility_list"
+        context["nav_bar"] = "facility"
         context['facility'] = self.model.objects.all().order_by('-id')
         return context
 
@@ -397,7 +463,7 @@ def new_facility(request):
 
     elif request.method == 'POST':
         print("Post called")
-        facility_form = FacilityCreateForm(request.POST)
+        facility_form = FacilityCreateForm(request.POST, request.FILES)
 
         if facility_form.is_valid():
             facility = facility_form.save(commit=False)
@@ -413,8 +479,31 @@ def new_facility(request):
     return render(request, template_name, {
         'facility_form': facility_form,
         'title': 'New Facility',
-        'nav_bar': 'new_facility',
+        'nav_bar': 'facility',
     })
+
+
+class FacilityUpdateView(SuccessMessageMixin, UpdateView):
+    model = Facility
+    form_class = FacilityCreateForm
+    success_url = reverse_lazy('facility-list')
+    template_name = 'web_data/update_facility.html'
+    success_message = "Facility was updated successfully"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Update Facility Information"
+        context["nav_bar"] = "facility"
+        return context
+
+
+def facility_delete(request, id):
+    if request.method == 'GET':
+        instance = Facility.objects.get(id=id)
+        Facility.objects.filter(id=instance.id).delete()
+        instance.delete()
+        messages.add_message(request, messages.WARNING, 'Delete Success')
+        return redirect('facility-list')
 
 
 class BenefitList(ListView):
@@ -425,7 +514,7 @@ class BenefitList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Benefit List"
-        context["nav_bar"] = "benefit_list"
+        context["nav_bar"] = "benefit"
         context['benefit'] = self.model.objects.all().order_by('-id')
         return context
 
@@ -455,5 +544,120 @@ def new_benefit(request):
     return render(request, template_name, {
         'benefit_form': benefit_form,
         'title': 'New Benefit',
-        'nav_bar': 'new_benefit',
+        'nav_bar': 'benefit',
     })
+
+
+class BenefitUpdateView(SuccessMessageMixin, UpdateView):
+    model = Benefit
+    form_class = BenefitCreateForm
+    success_url = reverse_lazy('benefit-list')
+    template_name = 'web_data/update_benefit.html'
+    success_message = "Benefit was updated successfully"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Update Benefit Information"
+        context["nav_bar"] = "benefit"
+        return context
+
+
+def benefit_delete(request, id):
+    if request.method == 'GET':
+        instance = Benefit.objects.get(id=id)
+        Benefit.objects.filter(id=instance.id).delete()
+        instance.delete()
+        messages.add_message(request, messages.WARNING, 'Delete Success')
+        return redirect('benefit-list')
+
+
+class SliderList(ListView):
+    model = Slider
+    template_name = 'web_data/slider_list.html'
+    context_object_name = 'slider'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Slider List"
+        context["nav_bar"] = "slider"
+        context['slider'] = self.model.objects.all().order_by('-id')
+        return context
+
+
+def new_slider(request):
+    template_name = 'web_data/new_slider.html'
+
+    if request.method == 'GET':
+        print("GET called")
+        slider_form = SliderCreateForm(None)
+
+    elif request.method == 'POST':
+        print("Post called")
+        slider_form = SliderCreateForm(request.POST, request.FILES)
+
+        if slider_form.is_valid():
+            slider = slider_form.save(commit=False)
+            slider.save()
+
+            messages.add_message(request, messages.SUCCESS, 'New Slider Entry Successful')
+            return redirect('slider-list')
+
+        else:
+            print("Not Valid Create Form")
+            print(slider_form.errors)
+
+    return render(request, template_name, {
+        'slider_form': slider_form,
+        'title': 'New Slider',
+        'nav_bar': 'slider',
+    })
+
+
+class SliderUpdateView(SuccessMessageMixin, UpdateView):
+    model = Slider
+    form_class = SliderCreateForm
+    success_url = reverse_lazy('slider-list')
+    template_name = 'web_data/update_slider.html'
+    success_message = "Slider was updated successfully"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Update Slider Information"
+        context["nav_bar"] = "slider"
+        return context
+
+
+def slider_delete(request, id):
+    if request.method == 'GET':
+        instance = Slider.objects.get(id=id)
+        Slider.objects.filter(id=instance.id).delete()
+        instance.delete()
+        messages.add_message(request, messages.WARNING, 'Delete Success')
+        return redirect('slider-list')
+
+
+class AboutList(ListView):
+    model = About
+    template_name = 'web_data/about_list.html'
+    context_object_name = 'about'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "About List"
+        context["nav_bar"] = "about"
+        context['about'] = self.model.objects.all().order_by('-id')
+        return context
+
+
+class AboutUpdateView(SuccessMessageMixin, UpdateView):
+    model = About
+    form_class = AboutCreateForm
+    success_url = reverse_lazy('about-list')
+    template_name = 'web_data/update_about.html'
+    success_message = "About was updated successfully"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Update About Information"
+        context["nav_bar"] = "about"
+        return context
