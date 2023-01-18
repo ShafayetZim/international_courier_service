@@ -156,3 +156,17 @@ class BenefitCreateForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'detail': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+
+class SliderCreateForm(forms.ModelForm):
+    class Meta:
+        model = Slider
+        fields = (
+            'title', 'detail', 'image', 'tag',
+        )
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'detail': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'rounded_list'}),
+            'tag': forms.TextInput(attrs={'class': 'form-control'}),
+        }

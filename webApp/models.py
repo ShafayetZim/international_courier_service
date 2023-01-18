@@ -1,6 +1,7 @@
 from django.db import models
 from dataset.models import *
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -103,7 +104,7 @@ class Review(models.Model):
 
 class About(models.Model):
     title = models.CharField(max_length=100)
-    detail = models.CharField(max_length=500)
+    detail = RichTextField()
     image = models.ImageField(upload_to='bg')
 
     def __str__(self):
@@ -127,6 +128,15 @@ class Benefit(models.Model):
     def __str__(self):
         return self.title
 
+
+class Slider(models.Model):
+    title = models.CharField(max_length=100)
+    detail = RichTextField()
+    image = models.ImageField(upload_to='slider')
+    tag = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
 
 
 
