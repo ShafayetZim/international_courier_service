@@ -750,6 +750,94 @@
 
             <li class="menu">
               <a
+                href="#web"
+                data-toggle="collapse"
+                aria-expanded="false"
+                class="dropdown-toggle"
+              >
+                <div class="">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 48 48"
+                  >
+                    <g fill="none" stroke-width="4">
+                      <rect width="38" height="24" x="5" y="8" fill="#2F88FF" stroke="#000" rx="2"/>
+                      <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M4 40L44 40"/>
+                      <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" d="M22 14L26 14"/>
+                    </g>
+                  </svg>
+                  <span>Website</span>
+                </div>
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-chevron-right"
+                  >
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
+              </a>
+              <ul
+                class="collapse submenu list-unstyled {% if nav_bar == 'review' or nav_bar == 'service' or nav_bar == 'gallery' or nav_bar == 'partner' or nav_bar == 'facility' or nav_bar == 'benefit' or nav_bar == 'about' or nav_bar == 'slider' %} show {% endif %}"
+                id="web"
+                data-parent="#accordionExample"
+              >
+                <li
+                  class="{% if nav_bar == 'review' %} active {% endif %}"
+                >
+                  <a href="{% url 'review-list' %}">Review </a>
+                </li>
+                <li
+                  class="{% if nav_bar == 'service' %} active {% endif %}"
+                >
+                  <a href="{% url 'service-list' %}">Service </a>
+                </li>
+                <li
+                  class="{% if nav_bar == 'gallery' %} active {% endif %}"
+                >
+                  <a href="{% url 'gallery-list' %}">Gallery </a>
+                </li>
+                <li
+                  class="{% if nav_bar == 'partner' %} active {% endif %}"
+                >
+                  <a href="{% url 'partner-list' %}">Partner </a>
+                </li>
+                <li
+                  class="{% if nav_bar == 'facility' %} active {% endif %}"
+                >
+                  <a href="{% url 'facility-list' %}">Facility </a>
+                </li>
+                <li
+                  class="{% if nav_bar == 'benefit' %} active {% endif %}"
+                >
+                  <a href="{% url 'benefit-list' %}">Benefit </a>
+                </li>
+                <li
+                  class="{% if nav_bar == 'about' %} active {% endif %}"
+                >
+                  <a href="{% url 'about-list' %}">About </a>
+                </li>
+                <li
+                  class="{% if nav_bar == 'slider' %} active {% endif %}"
+                >
+                  <a href="{% url 'slider-list' %}">Slider </a>
+                </li>
+
+              </ul>
+            </li>
+
+            <li class="menu">
+              <a
                 href="#users"
                 data-toggle="collapse"
                 aria-expanded="false"
