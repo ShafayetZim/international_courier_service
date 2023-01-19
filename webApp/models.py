@@ -114,6 +114,7 @@ class About(models.Model):
 class Facility(models.Model):
     title = models.CharField(max_length=100)
     detail = models.CharField(max_length=500)
+    tag = models.CharField(max_length=100, null=True)
     image = models.ImageField(upload_to='facility')
     icon = models.ImageField(upload_to='facility', blank=True)
 
@@ -139,4 +140,14 @@ class Slider(models.Model):
         return self.title
 
 
+class CargoService(models.Model):
+    title = models.CharField(max_length=100)
+    tag = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='service')
+    icon = models.ImageField(upload_to='service', blank=True)
+    point1 = models.CharField(max_length=100)
+    point2 = models.CharField(max_length=100)
+    point3 = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.title
