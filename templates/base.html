@@ -788,7 +788,7 @@
                 </div>
               </a>
               <ul
-                class="collapse submenu list-unstyled {% if nav_bar == 'review' or nav_bar == 'service' or nav_bar == 'gallery' or nav_bar == 'partner' or nav_bar == 'facility' or nav_bar == 'benefit' or nav_bar == 'about' or nav_bar == 'slider' %} show {% endif %}"
+                class="collapse submenu list-unstyled {% if nav_bar == 'review' or nav_bar == 'service' or nav_bar == 'gallery' or nav_bar == 'partner' or nav_bar == 'facility' or nav_bar == 'benefit' or nav_bar == 'about' or nav_bar == 'slider' or nav_bar == 'cargo' %} show {% endif %}"
                 id="web"
                 data-parent="#accordionExample"
               >
@@ -831,6 +831,11 @@
                   class="{% if nav_bar == 'slider' %} active {% endif %}"
                 >
                   <a href="{% url 'slider-list' %}">Slider </a>
+                </li>
+                <li
+                  class="{% if nav_bar == 'cargo' %} active {% endif %}"
+                >
+                  <a href="{% url 'cargo-list' %}">Cargo </a>
                 </li>
 
               </ul>
