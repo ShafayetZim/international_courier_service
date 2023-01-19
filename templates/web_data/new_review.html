@@ -28,21 +28,16 @@
 
                             <div class="col-6">
                                 <div class="form-group">
-                                    {{ review_form.review|as_crispy_field }}
+                                    {{ review_form.image|as_crispy_field }}
                                 </div>
                             </div>
                         </div>
 
                         <div class="row mb-2">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    {{ review_form.image|as_crispy_field }}
-                                </div>
-                            </div>
 
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="form-group">
-
+                                    {{ review_form.review|as_crispy_field }}
                                 </div>
                             </div>
 

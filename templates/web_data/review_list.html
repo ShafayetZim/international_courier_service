@@ -39,7 +39,7 @@
                     <td style="text-align:center"><img src="{{ item.image.url }}" alt=""  height="80" /></td>
                     <td style="text-align:center">
 
-                       <a href="{% url 'update-office' item.id %}">
+                       <a href="{% url 'update-review' item.id %}">
                             <button class="btn btn-outline-info"><i class="fa fa-edit"> </i></button>
                        </a>
 
@@ -53,12 +53,12 @@
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Delete Office Address</h4>
+                                        <h4 class="modal-title">Delete Client Review</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <h5 class="text-center p-2">Office Address:<span style="color: red"> {{item.name}}</span></h5>
+                                        <h5 class="text-center p-2">Client Name:<span style="color: red"> {{item.name}}</span></h5>
                                         <p>Are you sure to delete this data?
                                             This process can not be undone.</p>
                                     </div>
@@ -66,7 +66,7 @@
                                         <button type="button" class="btn btn-dark" data-dismiss="modal">
                                             Cancel
                                         </button>
-                                        <a href="{% url 'office-delete' id=item.id %}"
+                                        <a href="{% url 'review-delete' id=item.id %}"
                                            class="btn btn-danger">Delete</a>
                                     </div>
                                 </div>
