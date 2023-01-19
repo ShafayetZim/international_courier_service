@@ -14,9 +14,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 class HomeView(View):
     def get(self, request):
         context = {
-            # 'slider': Slider.objects.all(),
-            # 'ps': ProductSlider.objects.all(),
-            # 'description': HomeAbout.objects.all(),
+            'slider': Slider.objects.all(),
+            'cargo': CargoService.objects.all(),
+            'partner': Partner.objects.all(),
+            'facility': Facility.objects.all(),
             'title': "Index",
             'pageview': "Home"
         }
@@ -26,6 +27,10 @@ class HomeView(View):
 class AboutView(View):
     def get(self, request):
         context = {
+            'about': About.objects.all(),
+            'facility': Facility.objects.all(),
+            'benefit': Benefit.objects.all(),
+            'review': Review.objects.all(),
             'title': "About",
             'pageview': "About"
         }
@@ -35,6 +40,7 @@ class AboutView(View):
 class ServiceView(View):
     def get(self, request):
         context = {
+            'service': Service.objects.all(),
             'title': "Service",
             'pageview': "About"
         }
@@ -44,6 +50,7 @@ class ServiceView(View):
 class GalleryView(View):
     def get(self, request):
         context = {
+            'gallery': Gallery.objects.all(),
             'title': "Gallery",
             'pageview': "Gallery"
         }
@@ -661,3 +668,70 @@ class AboutUpdateView(SuccessMessageMixin, UpdateView):
         context["title"] = "Update About Information"
         context["nav_bar"] = "about"
         return context
+
+
+class CargoList(ListView):
+    model = CargoService
+    template_name = 'web_data/cargo_list.html'
+    context_object_name = 'cargo'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Cargo Service List"
+        context["nav_bar"] = "cargo"
+        context['cargo'] = self.model.objects.all().order_by('-id')
+        return context
+
+
+def new_cargo(request):
+    template_name = 'web_data/new_cargo.html'
+
+    if request.method == 'GET':
+        print("GET called")
+        cargo_form = CargoCreateForm(None)
+
+    elif request.method == 'POST':
+        print("Post called")
+        cargo_form = CargoCreateForm(request.POST, request.FILES)
+
+        if cargo_form.is_valid():
+            cargo = cargo_form.save(commit=False)
+            cargo.save()
+
+            messages.add_message(request, messages.SUCCESS, 'New Cargo Service Entry Successful')
+            return redirect('cargo-list')
+
+        else:
+            print("Not Valid Create Form")
+            print(cargo_form.errors)
+
+    return render(request, template_name, {
+        'cargo_form': cargo_form,
+        'title': 'New Cargo',
+        'nav_bar': 'cargo',
+    })
+
+
+class CargoUpdateView(SuccessMessageMixin, UpdateView):
+    model = CargoService
+    form_class = CargoCreateForm
+    success_url = reverse_lazy('cargo-list')
+    template_name = 'web_data/update_cargo.html'
+    success_message = "Cargo was updated successfully"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Cargo Benefit Information"
+        context["nav_bar"] = "cargo"
+        return context
+
+
+def cargo_delete(request, id):
+    if request.method == 'GET':
+        instance = CargoService.objects.get(id=id)
+        CargoService.objects.filter(id=instance.id).delete()
+        instance.delete()
+        messages.add_message(request, messages.WARNING, 'Delete Success')
+        return redirect('cargo-list')
+
+

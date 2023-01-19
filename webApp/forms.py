@@ -136,11 +136,12 @@ class FacilityCreateForm(forms.ModelForm):
     class Meta:
         model = Facility
         fields = (
-            'title', 'detail', 'image', 'icon',
+            'title', 'detail', 'image', 'icon', 'tag',
         )
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'detail': forms.TextInput(attrs={'class': 'form-control'}),
+            'tag': forms.TextInput(attrs={'class': 'form-control'}),
             'image': forms.FileInput(attrs={'class': 'rounded_list'}),
             'icon': forms.FileInput(attrs={'class': 'rounded_list'}),
         }
@@ -168,5 +169,22 @@ class SliderCreateForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'detail': forms.TextInput(attrs={'class': 'form-control'}),
             'image': forms.FileInput(attrs={'class': 'rounded_list'}),
+            'tag': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+class CargoCreateForm(forms.ModelForm):
+    class Meta:
+        model = CargoService
+        fields = (
+            'title', 'icon', 'image', 'tag', 'point1', 'point2', 'point3',
+        )
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'point1': forms.TextInput(attrs={'class': 'form-control'}),
+            'point2': forms.TextInput(attrs={'class': 'form-control'}),
+            'point3': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'rounded_list'}),
+            'icon': forms.FileInput(attrs={'class': 'rounded_list'}),
             'tag': forms.TextInput(attrs={'class': 'form-control'}),
         }
