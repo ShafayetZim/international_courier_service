@@ -354,95 +354,17 @@
                     <div class="col-md-12">
                         <div class="gallery1">
                             <div class="row masonary" id="masonary">
-                                <div class="col-md-3">
+                                {% for item in gallery %}
+                                <div class="{% cycle 'col-md-3' 'col-md-6' 'col-md-3' 'col-md-6' 'col-md-3' 'col-md-3' %}">
                                     <div class="gallery-img">
-                                        <img src="{% static 'web/images/resource/gallery1-1.jpg' %}" alt="" itemprop="image" />
+                                        <img src="{{item.image.url}}" alt="" itemprop="image" />
                                         <div class="gallery-detail">
                                             <h3>Worldwide Shipping</h3>
                                             <a data-lightbox="gallery-set2" href="{% static 'web/images/resource/gallery1-1.jpg' %}" title="" itemprop="url"><i class="fa fa-search-plus"></i></a>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <div class="gallery-img">
-                                        <img src="{% static 'web/images/resource/gallery1-2.jpg' %}" alt="" itemprop="image" />
-                                        <div class="gallery-detail">
-                                            <h3>New Service</h3>
-                                            <a data-lightbox="gallery-set2" href="{% static 'web/images/resource/gallery1-2.jpg' %}" title="" itemprop="url"><i class="fa fa-search-plus"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="gallery-img">
-                                        <img src="{% static 'web/images/resource/gallery1-3.jpg' %}" alt="" itemprop="image" />
-                                        <div class="gallery-detail">
-                                            <h3>We Are Hiring</h3>
-                                            <a data-lightbox="gallery-set2" href="{% static 'web/images/resource/gallery1-3.jpg' %}" title="" itemprop="url"><i class="fa fa-search-plus"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="gallery-img">
-                                        <img src="{% static 'web/images/resource/gallery1-4.jpg' %}" alt="" itemprop="image" />
-                                        <div class="gallery-detail">
-                                            <h3>First Quartal</h3>
-                                            <a data-lightbox="gallery-set2" href="{% static 'web/images/resource/gallery1-4.jpg' %}" title="" itemprop="url"><i class="fa fa-search-plus"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="gallery-img">
-                                        <img src="{% static 'web/images/resource/gallery1-5.jpg' %}" alt="" itemprop="image" />
-                                        <div class="gallery-detail">
-                                            <h3>Revenu Report</h3>
-                                            <a data-lightbox="gallery-set2" href="{% static 'web/images/resource/gallery1-5.jpg' %}" title="" itemprop="url"><i class="fa fa-search-plus"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="gallery-img">
-                                        <img src="{% static 'web/images/resource/gallery1-6.jpg' %}" alt="" itemprop="image" />
-                                        <div class="gallery-detail">
-                                            <h3>Justify</h3>
-                                            <a data-lightbox="gallery-set2" href="{% static 'web/images/resource/gallery1-6.jpg' %}" title="" itemprop="url"><i class="fa fa-search-plus"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="gallery-img">
-                                        <img src="{% static 'web/images/resource/gallery1-7.jpg' %}" alt="" itemprop="image" />
-                                        <div class="gallery-detail">
-                                            <h3>Cras Cursus</h3>
-                                            <a data-lightbox="gallery-set2" href="{% static 'web/images/resource/gallery1-7.jpg' %}" title="" itemprop="url"><i class="fa fa-search-plus"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="gallery-img">
-                                        <img src="{% static 'web/images/resource/gallery1-8.jpg' %}" alt="" itemprop="image" />
-                                        <div class="gallery-detail">
-                                            <h3>New Services</h3>
-                                            <a data-lightbox="gallery-set2" href="{% static 'web/images/resource/gallery1-8.jpg' %}" title="" itemprop="url"><i class="fa fa-search-plus"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="gallery-img">
-                                        <img src="{% static 'web/images/resource/gallery1-9.jpg' %}" alt="" itemprop="image" />
-                                        <div class="gallery-detail">
-                                            <h3>Logistics</h3>
-                                            <a data-lightbox="gallery-set2" href="{% static 'web/images/resource/gallery1-9.jpg' %}" title="" itemprop="url"><i class="fa fa-search-plus"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
