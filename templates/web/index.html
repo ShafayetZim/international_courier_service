@@ -342,9 +342,9 @@
         <div class="main-slider overlape">
             <div id="full-slider-wrapper">
                 <div id="layerslider" style="width:100%; height:696px; ">
-
+{% for item in slider %} {% if forloop.first %}
                     <div class="ls-slide" data-ls="transition2d:35; timeshift:-1000; slidedelay: 7000;">
-                        <img itemprop="image" src="{% static 'web/images/resource/slide1.jpg' %}" class="ls-bg" alt="Slide background" />
+                        <img itemprop="image" src="{{item.image.url}}" class="ls-bg" alt="Slide background" />
 
                         <div class="ls-slide" style="font-family:raleway; font-weight:700; font-size:16px; text-transform:uppercase; line-height:28px; color:#ffffff; top:214px; left:100px;" data-ls="offsetxout:right; offsetxin:left; durationin:700; delayin:110; easingin:easeOutElastic; fadein:false; easingout:easeInBack; fadeout:false;">We Offer Transport</div>
 
@@ -354,16 +354,16 @@
 
                         <div class="ls-slide" style="font-family:roboto; font-size:250px; color:#ebe814; font-weight:900; top:180px; left:500px;" data-ls="offsetyout:top; offsetyin:bottom; durationin:1000; delayin:1000; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">O</div>
 
-                        <div class="ls-slide" style="line-height:28px; font-family:lato; font-size:15px; color:#ffffff; top:445px; left:100px;" data-ls="offsetxout:left; offsetxin:right; durationin:1300; delayin:1200; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">Duis sed odio sit amet nibh vulputate cursus a sit amet mauris <br /> ipsum velit. Nam nec tellus aodio tincidunt auctor.</div>
+                        <div class="ls-slide" style="line-height:28px; font-family:lato; font-size:15px; color:#ffffff; top:445px; left:100px;" data-ls="offsetxout:left; offsetxin:right; durationin:1300; delayin:1200; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">{{item.detail|safe}}</div>
 
                         <a href="{% url 'booking' %}" itemprop="url" title="" class="ls-slide slide-icon" style="padding:16px 45px; background:#ffb400; color:#ffffff; font-size:12px; top:539px; left:100px;" data-ls="offsetxout:left; offsetyin:bottom; durationin:1500; delayin:1300; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">ORDER NOW</a>
 
                         <img src="{% static 'web/images/resource/slide-model.png' %}" alt="" itemprop="image" class="ls-slide" style="top:0; left:540px;" data-ls="offsetyout:top; offsetyin:bottom; durationin:2000; delayin:1500; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;" />
                     </div><!-- Slide 1 -->
-
+{% endif %} {% if forloop.counter == 2 %}
                     <div class="ls-slide" data-ls="transition2d:40; timeshift:-1000; slidedelay: 6000;">
 
-                        <img itemprop="image" src="{% static 'web/images/resource/slide2.jpg' %}" class="ls-bg" alt="Slide background" />
+                        <img itemprop="image" src="{{item.image.url}}" class="ls-bg" alt="Slide background" />
 
 <!--                        <img src="{% static 'web/images/resource/logo2.png' %}" alt="" itemprop="image" class="ls-slide" style="top:200px; left:50%;" data-ls="offsetyout:top; offsetyin:top; durationin:700; delayin:110; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;" />-->
 
@@ -371,11 +371,11 @@
 
                         <span class="ls-slide" style="top:390px; left:50%; font-family:roboto; color:#ffffff; border-radius:3px; padding:12px 40px; background:rgba(31,66,93,.81); font-size:20px; font-weight:200;" data-ls="offsetyout:bottom; offsetyin:top; durationin:1300; delayin:500; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">Logistics &amp; Transportation</span>
 
-                        <div class="ls-slide" style="top:467px; left:50%; line-height:28px; font-family:lato; font-size:15px; color:#ffffff; text-align:center;" data-ls="offsetxout:left; offsetxin:right; durationin:1500; delayin:700; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan <br /> ipsum velit. Nam nec tellus aodio tincidunt auctor a ornare odio.</div>
+                        <div class="ls-slide" style="top:467px; left:50%; line-height:28px; font-family:lato; font-size:15px; color:#ffffff; text-align:center;" data-ls="offsetxout:left; offsetxin:right; durationin:1500; delayin:700; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">{{item.detail|safe}}</div>
                     </div><!-- Slide 2 -->
-
+{% endif %} {% if forloop.last %}
                     <div class="ls-slide" data-ls="transition2d:30; timeshift:-1000; slidedelay: 6000;">
-                        <img itemprop="image" src="{% static 'web/images/resource/slide3.jpg' %}" class="ls-bg" alt="Slide background" />
+                        <img itemprop="image" src="{{item.image.url}}" class="ls-bg" alt="Slide background" />
 
                         <div class="ls-slide" style="top:223px; left:0;font-family:roboto; font-size:22px; color:#ffffff; text-shadow: -2px 4px 18px rgba(0, 0, 0, 0.15);" data-ls="offsetyout:top; offsetyin:top; durationin:700; delayin:110; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">Making Transportation</div>
 
@@ -383,10 +383,11 @@
 
                         <strong class="ls-slide" style="top:345px; left:0; letter-spacing:3px; font-family:raleway; color:#ffffff; text-transform:uppercase; border-radius:3px; padding:14px 25px; background:#1f425d; font-size:13px;" data-ls="offsetyout:bottom; offsetyin:top; durationin:1300; delayin:500; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">Fast &amp; Secure Delivery</strong>
 
-                        <div class="ls-slide" style="top:425px; left:0;line-height:28px; font-family:lato; font-size:15px; color:#ffffff;" data-ls="offsetxout:left; offsetxin:right; durationin:1500; delayin:700; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean <br /> nascetur ridiculus mus dolor sit amet, consectetu.</div>
+                        <div class="ls-slide" style="top:425px; left:0;line-height:28px; font-family:lato; font-size:15px; color:#ffffff;" data-ls="offsetxout:left; offsetxin:right; durationin:1500; delayin:700; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">{{item.detail|safe}}</div>
 
                         <a href="{% url 'volume' %}" itemprop="url" title="" class="ls-slide slide-btn slide-icon" style="top:515px; left:0; text-transform:uppercase; padding:16px 40px; color:#ffb400; border:2px solid #ffb400; font-family:raleway; font-size:13px; font-weight:700;" data-ls="offsetxout:left; offsetyin:bottom; durationin:1700; delayin:1000; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">CALCULATE PACKAGE</a>
                     </div><!-- Slide 3 -->
+{% endif %} {% endfor %}
                 </div>
             </div>
         </div><!-- Main Slider -->
@@ -422,57 +423,25 @@
 
                         <div class="top-margin packages">
                             <div class="row">
+                                {% for item in cargo %}
                                 <div class="col-md-4">
                                     <div class="our-packages">
                                         <div class="packages-thumb">
-                                            <img itemprop="image" src="{% static 'web/images/resource/packages1.jpg' %}" alt="" />
+                                            <img itemprop="image" src="{{item.image.url}}" alt="" />
                                             <div class="packages-info">
-                                                <img src="{% static 'web/images/resource/packages-info1.png' %}" alt="" itemprop="image" />
-                                                <h2 itemprop="name"><a itemprop="url" href="#" title="">Air Freight</a></h2>
-                                                <span>Delivery 3-4 Days</span>
+                                                <img src="{{item.icon.url}}" alt="" itemprop="image" />
+                                                <h2 itemprop="name"><a itemprop="url" href="#" title="">{{item.title}}</a></h2>
+                                                <span>{{item.tag}}</span>
                                                 <ul>
-                                                    <li>Flat Rate For Each Shipment.</li>
-                                                    <li>Delivery On Your Doorstep</li>
-                                                    <li>Charters &amp; Intermodal Transportation</li>
+                                                    <li>{{item.point1}}</li>
+                                                    <li>{{item.point2}}</li>
+                                                    <li>{{item.point3}}</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="our-packages">
-                                        <div class="packages-thumb">
-                                            <img itemprop="image" src="{% static 'web/images/resource/packages2.jpg' %}" alt="" />
-                                            <div class="packages-info">
-                                                <img src="{% static 'web/images/resource/packages-info2.png' %}" alt="" itemprop="image" />
-                                                <h2 itemprop="name"><a itemprop="url" href="#" title="">Road Freight</a></h2>
-                                                <span>Delivery 3-4 Days</span>
-                                                <ul>
-                                                    <li>100% Sure And Safe Cargo Service</li>
-                                                    <li>Direct Door-To-Door Service.</li>
-                                                    <li>Same-Day Or Overnight Delivery</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="our-packages">
-                                        <div class="packages-thumb">
-                                            <img itemprop="image" src="{% static 'web/images/resource/packages3.jpg' %}" alt="" />
-                                            <div class="packages-info">
-                                                <img src="{% static 'web/images/resource/packages-info3.png' %}" alt="" itemprop="image" />
-                                                <h2 itemprop="name"><a itemprop="url" href="#" title="">Ocean Freight</a></h2>
-                                                <span>Delivery 3-4 Days</span>
-                                                <ul>
-                                                    <li>No Commission Or Monthly Fees</li>
-                                                    <li>Save Hundreds Of Dollars</li>
-                                                    <li>Over 42,000 Dedicated Employees</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -492,38 +461,16 @@
                     </div>
                     <div class="col-md-9">
                         <div class="modern-services-carousel style2" id="modern-services-carousel">
+                            {% for item in facility %}
                             <div class="modern-service">
                                 <div class="mod-service-inner">
-                                    <span><img itemprop="image" alt="" src="{% static 'web/images/resource/101.png' %}"></span>
-                                    <h3><a href="#" title="">Reports & Visibility</a></h3>
-                                    <i>Professionally Productize</i>
-                                    <p>TPC come with easy online tracking facility.</p>
+                                    <span><img itemprop="image" alt="" src="{{item.icon.url}}"></span>
+                                    <h3><a href="#" title="">{{item.title}}</a></h3>
+                                    <i>{{item.tag}}</i>
+                                    <p>{{item.detail}}</p>
                                 </div>
                             </div><!-- Modern Service -->
-                            <div class="modern-service">
-                                <div class="mod-service-inner">
-                                    <span><img itemprop="image" alt="" src="{% static 'web/images/resource/102.png' %}"></span>
-                                    <h3><a href="#" title="">Packages Storage</a></h3>
-                                    <i>Professionally Productize</i>
-                                    <p>Ship packages directly to secured spaces storage unit.</p>
-                                </div>
-                            </div><!-- Modern Service -->
-                            <div class="modern-service">
-                                <div class="mod-service-inner">
-                                    <span><img itemprop="image" alt="" src="{% static 'web/images/resource/103.png' %}"></span>
-                                    <h3><a href="#" title="">Company Contract</a></h3>
-                                    <i>Professionally Productize</i>
-                                    <p>Contract with the customers is reciprocally beneficial.</p>
-                                </div>
-                            </div><!-- Modern Service -->
-                            <div class="modern-service">
-                                <div class="mod-service-inner">
-                                    <span><img itemprop="image" alt="" src="{% static 'web/images/resource/101.png' %}"></span>
-                                    <h3><a href="#" title="">Reports & Visibility</a></h3>
-                                    <i>Professionally Productize</i>
-                                    <p>TPC come with easy online tracking facility.</p>
-                                </div>
-                            </div><!-- Modern Service -->
+                            {% endfor %}
                         </div><!-- Modern Services Carousel -->
                     </div>
                 </div>
@@ -535,11 +482,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="partners" id="partners">
-                            <li><a itemprop="url" href="#" title=""><img itemprop="image" src="{% static 'web/images/resource/partner1.png' %}" alt="" /></a></li>
-                            <li><a itemprop="url" href="#" title=""><img itemprop="image" src="{% static 'web/images/resource/partner2.png' %}" alt="" /></a></li>
-                            <li><a itemprop="url" href="#" title=""><img itemprop="image" src="{% static 'web/images/resource/partner3.png' %}" alt="" /></a></li>
-                            <li><a itemprop="url" href="#" title=""><img itemprop="image" src="{% static 'web/images/resource/partner4.png' %}" alt="" /></a></li>
-                            <li><a itemprop="url" href="#" title=""><img itemprop="image" src="{% static 'web/images/resource/partner5.png' %}" alt="" /></a></li>
+                            {% for item in partner %}
+                            <li><a itemprop="url" href="#" title=""><img itemprop="image" src="{{item.image.url}}" alt="" /></a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
