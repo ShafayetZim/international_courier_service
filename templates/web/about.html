@@ -352,16 +352,16 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div id="about-shipment">
+							{% for item in about %}
 							<div class="row">
 								<div class="col-md-6">
 									<div class="safe-affordable-cargo shippment-guide">
 										<div class="title2">
 											<strong>SAFE &amp; AFFORDABLE</strong>
-											<h2>We Provide Courier Service</h2>
+											<h2>{{item.title}}</h2>
 										</div>
-										<p itemprop="description">The Professional Courier is an international express platform operator which specializes in providing global networks & channels; as well as build up a common platform for express company.</p>
-										<p>&nbsp;</p>
-										<p>The company, which is located in Dhaka, Bangladesh, was set-up in 1999 and has been servicing the clients ever since with their transport requirement. We provide highly reliable parcel and express services as well as value-added customer-specific total transport solutions. The company provides a professional courier services to their businesses partners which are designed to be cost effective.</p>
+										<p itemprop="description">{{item.detail|safe}}</p>
+
 										<div class="services1">
 											<div class="row">
 												<div class="col-md-6">
@@ -390,10 +390,11 @@
 								</div>
 								<div class="col-md-6">
 									<div class="about-shipment-thumb">
-										<img src="{% static 'web/images/resource/about-shipment-thumb.jpg' %}" alt="" itemprop="image" />
+										<img src="{{ item.image.url }}" alt="" itemprop="image" />
 									</div>
 								</div>
 							</div>
+							{% endfor %}
 						</div><!-- About Shipment -->
 					</div>
 				</div>
@@ -408,35 +409,21 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="heading2 heading4 light">
-										<span>What People Says About Us</span>
+										<span>What Actually Are We</span>
 										<h3>COMPANY BENEFITS</h3>
 									</div>
 									<div class="company-benifits">
 										<div class="toggle" id="toggle">
+											{% for item in benefit %}
 											<div class="toggle-item activate">
-												<h3 class="active"><i class="fa fa-life-bouy"></i>Using This Dedicated Purpose Theme? <span><i class="fa fa-angle-up"></i></span></h3>
+												<h3 class="active"><i class="fa fa-life-bouy"></i>{{item.title}} <span><i class="fa fa-angle-up"></i></span></h3>
 												<div class="content">
 													<div class="simple-text">
-														<p>Suspendisse potenti. Maecenas dapibus ac tellus sed pulvinar estibulum bib volutpat. Sociis, eget mollis, exercitationem fames.</p>
+														<p>{{item.detail}}</p>
 													</div>
 												</div>
 											</div>
-											<div class="toggle-item">
-												<h3 class=""><i class="fa fa-joomla"></i>Creative And Corporate Industries? <span><i class="fa fa-angle-up"></i></span></h3>
-												<div class="content">
-													<div class="simple-text">
-														<p>Suspendisse potenti. Maecenas dapibus ac tellus sed pulvinar estibulum bib volutpat. Sociis, eget mollis, exercitationem fames.</p>
-													</div>
-												</div>
-											</div>
-											<div class="toggle-item">
-												<h3 class=""><i class="fa fa-leaf"></i>Business Niche Or Creative Style? <span><i class="fa fa-angle-up"></i></span></h3>
-												<div class="content">
-													<div class="simple-text">
-														<p>Suspendisse potenti. Maecenas dapibus ac tellus sed pulvinar estibulum bib volutpat. Sociis, eget mollis, exercitationem fames.</p>
-													</div>
-												</div>
-											</div>
+											{% endfor %}
 										</div>
 									</div>
 								</div>
@@ -448,38 +435,18 @@
 
 									<div class="customers-reviews">
 										<div class="customers-review-carousel" id="customers-review-carousel">
+											{% for item in review %}
 											<div class="review-area">
-												<div class="customer-thumb"><img src="{% static 'web/images/resource/review1.jpg' %}" alt="" itemprop="image" /></div>
+												<div class="customer-thumb"><img src="{{item.image.url}}" alt="" itemprop="image" /></div>
 												<div class="customer-detail">
-													<p itemprop="description"><span><i class="fa fa-quote-left"></i></span>Lorem ipsum dolor sit amet, cons ectetuer adipiscing diculus mus. Lorem ipsum dolor siamet, con ridiculus sum dolor sit ametum. Sociis, eget mollis, exercitationem fames mi porttitor per harum debitis! Praesent fugiat reprehenderit qui Molestiae. Pellentesque.</p>
+													<p itemprop="description"><span><i class="fa fa-quote-left"></i></span>{{item.review}}</p>
 													<div class="customer-info">
-														<h4>YMYZ ADAMS</h4>
+														<h4>{{item.name}}</h4>
 														<h5>CUSTOMER REVIEWS</h5>
 													</div>
 												</div>
 											</div>
-
-											<div class="review-area">
-												<div class="customer-thumb"><img src="{% static 'web/images/resource/review2.jpg' %}" alt="" itemprop="image" /></div>
-												<div class="customer-detail">
-													<p itemprop="description"><span><i class="fa fa-quote-left"></i></span>Lorem ipsum dolor sit amet, cons ectetuer adipiscing diculus mus. Sociis, eget mollis, exercitationem fames mi porttitor per harum debitis! Praesent fugiat reprehenderit qui Molestiae. Lorem ipsum dolor siamet, con ridiculus sum dolor sit ametum Pellentesque.</p>
-													<div class="customer-info">
-														<h4>JOHAN DOE</h4>
-														<h5>CUSTOMER REVIEWS</h5>
-													</div>
-												</div>
-											</div>
-
-											<div class="review-area">
-												<div class="customer-thumb"><img src="{% static 'web/images/resource/review3.jpg' %}" alt="" itemprop="image" /></div>
-												<div class="customer-detail">
-													<p itemprop="description"><span><i class="fa fa-quote-left"></i></span>Sociis, eget mollis, exercitationem fames mi porttitor per harum debitis! Praesent fugiat reprehenderit qui Molestiae. Pellentesque. Lorem ipsum dolor sit amet, cons ectetuer adipiscing diculus mus. Lorem ipsum dolor siamet, con ridiculus sum dolor sit ametum. </p>
-													<div class="customer-info">
-														<h4>JOHAN CARTER</h4>
-														<h5>CUSTOMER REVIEWS</h5>
-													</div>
-												</div>
-											</div>
+											{% endfor %}
 										</div>
 									</div>
 								</div>
@@ -505,38 +472,18 @@
 
 							<div class="top-margin">
 								<div class="row">
+									{% for item in facility %}
 									<div class="col-md-4">
 										<div class="post-style2">
-											<span><img src="{% static 'web/images/resource/post-thumb2-1.jpg' %}" alt="" itemprop="image" /></span>
+											<span><img src="{{item.image.url}}" alt="" itemprop="image" /></span>
 											<div class="post-info2">
-												<i><img src="{% static 'web/images/resource/101.png' %}" alt="" itemprop="image"></i>
-												<h4><a href="#" title="" itemprop="url">Reports &amp; Visibility</a></h4>
-												<span>Professionally productize</span>
+												<i><img src="{{item.icon.url}}" alt="" itemprop="image"></i>
+												<h4><a href="#" title="" itemprop="url">{{item.title}}</a></h4>
+												<span>{{item.tag}}</span>
 											</div>
 										</div>
 									</div>
-
-									<div class="col-md-4">
-										<div class="post-style2">
-											<span><img src="{% static 'web/images/resource/post-thumb2-2.jpg' %}" alt="" itemprop="image" /></span>
-											<div class="post-info2">
-												<i><img src="{% static 'web/images/resource/102.png' %}" alt="" itemprop="image"></i>
-												<h4><a href="#" title="" itemprop="url">Packages Storage</a></h4>
-												<span>Professionally productize</span>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-md-4">
-										<div class="post-style2">
-											<span><img src="{% static 'web/images/resource/post-thumb2-3.jpg' %}" alt="" itemprop="image" /></span>
-											<div class="post-info2">
-												<i><img src="{% static 'web/images/resource/103.png' %}" alt="" itemprop="image"></i>
-												<h4><a href="#" title="" itemprop="url">Company Contract</a></h4>
-												<span>Professionally productize</span>
-											</div>
-										</div>
-									</div>
+									{% endfor %}
 								</div>
 							</div>
 						</div><!-- What Make Us Different -->
@@ -544,107 +491,6 @@
 				</div>
 			</div>
 		</section>
-
-<!--		<section class="block blackish">-->
-<!--			<div class="fixed-bg" style="background:url('{% static 'web/images/parallax1.jpg' %}')"></div>-->
-<!--			<div class="container">-->
-<!--				<div class="row">-->
-<!--					<div class="col-md-12">-->
-<!--						<div id="members-sec">-->
-<!--							<div class="heading heading5">-->
-<!--								<span>WHAT WE PROVIDE FOR CLIENTS BENEFITS</span>-->
-<!--								<h2>COMPANY EMPLOYEES</h2>-->
-<!--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam modi consequuntur maxime voluptates earum illo sunt.</p>-->
-<!--							</div>-->
-
-<!--							<div class="members-area top-margin">-->
-<!--								<div class="member clicked">-->
-<!--									<div class="member-thumb">-->
-<!--										<img src="{% static 'web/images/resource/team1.jpg' %}" alt="" itemprop="image" />-->
-<!--										<div class="member-info">-->
-<!--											<span>Founder / Ceo</span>-->
-<!--											<h4><a href="#" title="" itemprop="url">JACOB HORAM</a></h4>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--									<div class="member-detail">-->
-<!--										<div class="member-info">-->
-<!--											<span>Founder / Ceo</span>-->
-<!--											<h4><a href="#" title="" itemprop="url">JACOB HORAM</a></h4>-->
-<!--										</div>-->
-<!--										<p>Lorem ipsum dolor sit amet, conse ctetuer aessa. Cum sociis natoque pena culus muse ore dolor sit ame dolor sit amet.</p>-->
-<!--										<ul class="social-btns">-->
-<!--											<li><a href="#" title="" itemprop="url"><i class="fa fa-twitter"></i></a></li>-->
-<!--											<li><a href="#" title="" itemprop="url"><i class="fa fa-linkedin"></i></a></li>-->
-<!--											<li><a href="#" title="" itemprop="url"><i class="fa fa-facebook"></i></a></li>-->
-<!--										</ul>-->
-<!--									</div>-->
-<!--								</div>-->
-
-<!--								<div class="member">-->
-<!--									<div class="member-thumb">-->
-<!--										<img src="{% static 'web/images/resource/team2.jpg' %}" alt="" itemprop="image" />-->
-<!--										<div class="member-info">-->
-<!--											<span>Marketing Assistant</span>-->
-<!--											<h4><a href="#" title="" itemprop="url">Jessica Bonner</a></h4>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--									<div class="member-detail">-->
-<!--										<div class="member-info">-->
-<!--											<span>Marketing Assistant</span>-->
-<!--											<h4><a href="#" title="" itemprop="url">Jessica Bonner</a></h4>-->
-<!--										</div>-->
-<!--										<p>Lorem ipsum dolor sit amet, conse ctetuer aessa. Cum sociis natoque pena culus muse ore dolor sit ame dolor sit amet.</p>-->
-<!--										<ul class="social-btns">-->
-<!--											<li><a href="#" title="" itemprop="url"><i class="fa fa-twitter"></i></a></li>-->
-<!--											<li><a href="#" title="" itemprop="url"><i class="fa fa-linkedin"></i></a></li>-->
-<!--											<li><a href="#" title="" itemprop="url"><i class="fa fa-facebook"></i></a></li>-->
-<!--										</ul>-->
-<!--									</div>-->
-<!--								</div>-->
-
-<!--								<div class="member">-->
-<!--									<div class="member-thumb">-->
-<!--										<img src="{% static 'web/images/resource/team3.jpg' %}" alt="" itemprop="image" />-->
-<!--										<div class="member-info">-->
-<!--											<span>Insurance Manager</span>-->
-<!--											<h4><a href="#" title="" itemprop="url">Patrick Oconor</a></h4>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--									<div class="member-detail">-->
-<!--										<div class="member-info">-->
-<!--											<span>Insurance Manager</span>-->
-<!--											<h4><a href="#" title="" itemprop="url">Patrick Oconor</a></h4>-->
-<!--										</div>-->
-<!--										<p>Lorem ipsum dolor sit amet, conse ctetuer aessa. Cum sociis natoque pena culus muse ore dolor sit ame dolor sit amet.</p>-->
-<!--										<ul class="social-btns">-->
-<!--											<li><a href="#" title="" itemprop="url"><i class="fa fa-twitter"></i></a></li>-->
-<!--											<li><a href="#" title="" itemprop="url"><i class="fa fa-linkedin"></i></a></li>-->
-<!--											<li><a href="#" title="" itemprop="url"><i class="fa fa-facebook"></i></a></li>-->
-<!--										</ul>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>&lt;!&ndash; Members Sec &ndash;&gt;-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</section>-->
-
-<!--		<section class="block no-padding">-->
-<!--			<div class="container">-->
-<!--				<div class="row">-->
-<!--					<div class="col-md-12">-->
-<!--						<ul class="partners" id="partners">-->
-<!--							<li><a itemprop="url" href="#" title=""><img itemprop="image" src="{% static 'web/images/resource/partner1.png' %}" alt="" /></a></li>-->
-<!--							<li><a itemprop="url" href="#" title=""><img itemprop="image" src="{% static 'web/images/resource/partner2.png' %}" alt="" /></a></li>-->
-<!--							<li><a itemprop="url" href="#" title=""><img itemprop="image" src="{% static 'web/images/resource/partner3.png' %}" alt="" /></a></li>-->
-<!--							<li><a itemprop="url" href="#" title=""><img itemprop="image" src="{% static 'web/images/resource/partner4.png' %}" alt="" /></a></li>-->
-<!--							<li><a itemprop="url" href="#" title=""><img itemprop="image" src="{% static 'web/images/resource/partner5.png' %}" alt="" /></a></li>-->
-<!--						</ul>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</section>-->
 
 		<footer>
 			<section class="block">
